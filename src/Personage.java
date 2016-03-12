@@ -6,9 +6,10 @@ public abstract class Personage {
 	private Parcelle p;
 		
 	public Personage(int equipe,int energie,Parcelle p){
-		this.setEquipe(equipe);
-		this.setEnergie(energie);
-		this.setP(p);
+		this.equipe=equipe;
+		this.energie=energie;
+		this.p=p;
+		
 	}
 
 	public int getEquipe() {

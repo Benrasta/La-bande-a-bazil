@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * classe parcelle
  * @author doudou
@@ -31,8 +33,8 @@ public class Parcelle {
 	}
 	//changer le SDD, passer en String et non en boolean !!
 	//méthode qui permet de savoir si l'élément est un bateau 
-	boolean EstBateau(){
-		if(this.equals(listbateau.get(0).getP)||this.equals(listbateau.get(1).getP)){  //getp return la parcel de la list debateau al'indice donné
+	boolean EstBateau(ArrayList<Bateau> listbateau){
+		if(this.equals(listbateau.get(0).getP())||this.equals(listbateau.get(1).getP())){  //getp return la parcel de la list debateau al'indice donné
 			return true;
 	}
 		else return false;
@@ -40,7 +42,7 @@ public class Parcelle {
 	
 	//renvoie le contenu en String de la parcelle à l'indice x et y donné, pour cela doit aller piocher l'indice dans la liste d'éléments
 	String contenu(int x, int y, Parcelle[][] parcelle){
-		if ( parcelle[x][y].equals(listElement.get()) )
+		if ( parcelle[x][y].equals(listElement.getPe()) )
 			
 		
 	}

@@ -7,7 +7,7 @@ public class Bateau {
 	
 	
 	public Bateau(int equipe,Parcelle p){
-		this.setP(p);
+		this.p=p;
 		this.equipe=equipe;
 		this.lp=new ArrayList<Personage>();
 	}

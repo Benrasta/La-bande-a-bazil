@@ -1,15 +1,28 @@
 
 public class Element {
 	
-	String element;
+	private int element;
+	private Parcelle pe;
 	
-	Element(int e){
-		if ( e == '1')
-			this.element = " rocher ";
-		else if ( e == '2')
-			this.element = " cle ";
-		else if ( e == '3' )
-			this.element = " coffre ";
+	public Element(int element,Parcelle pe){
+		this.element=element;
+		this.pe=pe;
+	}
+
+	public int getElement() {
+		return element;
+	}
+
+	public void setElement(int element) {
+		this.element = element;
+	}
+
+	public Parcelle getPe() {
+		return pe;
+	}
+
+	public void setPe(Parcelle pe) {
+		this.pe = pe;
 	}
 	
 }
