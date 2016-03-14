@@ -9,15 +9,24 @@ public class Bateau {
 	public Bateau(int equipe,Parcelle p){
 		this.p=p;
 		this.equipe=equipe;
-		this.lp=new ArrayList<Personage>();
+		this.lp= new ArrayList<Personage>();
 	}
 
 	public Parcelle getP() {
 		return p;
 	}
 
-	public void setP(Parcelle p) {
-		this.p = p;
+	
+	public ArrayList<Personage> getLp() {
+		return lp;
+	}
+
+	public int getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(int equipe) {
+		this.equipe = equipe;
 	}
 	
 	

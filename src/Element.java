@@ -21,8 +21,27 @@ public class Element {
 		return pe;
 	}
 
-	public void setPe(Parcelle pe) {
-		this.pe = pe;
+
+	boolean EstCoffre(){
+		if( this.getElement()==3){
+			return true;
+		}else {
+		return false;
+		}
+	}
+	boolean EstCle(){
+		if( this.getElement()==2){
+			return true;
+		}else {
+		return false;
+		}
+	}
+	boolean EstRocher(){
+		if( this.getElement()==1){
+			return true;
+		}else {
+		return false;
+		}
 	}
 	
 }

@@ -3,9 +3,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		Element element = new Element(0);
-		String essai = element;
+		Ile laplaya = new Ile();
+		laplaya.initialized();
+		System.out.println(laplaya.toString());
+		
 		
 	}
 
