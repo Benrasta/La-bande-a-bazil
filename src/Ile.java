@@ -22,6 +22,7 @@ public class Ile {
 	
 	
 	public void initialized(){
+		//initialize le tableau et creation des parcel;
 		for(int i = 0; i<this.getCarte().length;i++ ){
 			for(int j = 0; j < this.getCarte()[1].length;j++ ){
 				this.carte[i][j]= new Parcelle(i,j);
@@ -32,8 +33,26 @@ public class Ile {
 		int equi=2;
 		while(equi >= 1){
 			//coordoné aleatoire d'une parcel pour un bateau
-			int j = new Random().nextInt(this.getCarte().length);
-			int k = new Random().nextInt(this.getCarte()[1].length);
+				//int j = new Random().nextInt(this.getCarte().length);
+				//int k = new Random().nextInt(this.getCarte()[1].length);
+			int j=0;
+			int k =0;
+			int pl= new Random().nextInt(4);
+			if(pl == 0){
+				j = new Random().nextInt(this.getCarte().length);
+			}
+			if(pl==1){
+				k = new Random().nextInt(this.getCarte()[1].length);
+			}
+			if(pl==2){
+				j=this.getCarte().length-1;
+				k = new Random().nextInt(this.getCarte()[1].length);
+			}
+			if(pl==3){
+				j = new Random().nextInt(this.getCarte().length);
+				k=this.getCarte()[1].length-1;
+			}
+
 			if(tmmp[j][k] != true){
 			this.listbateau.add(new Bateau(equi,new Parcelle(j,k)));
 			carte[j][k].estbateau = true;
@@ -66,7 +85,7 @@ public class Ile {
 			for(int j = 0; j < this.getCarte()[1].length;j++ ){
 				
 				if(carte[i][j].estbateau){
-					if(this.listbateau.get(0).getP().getX()==i &&this.listbateau.get(0).getP().getY()== j ){
+					if(carte[i][j].equals(this.listbateau.get(0).getP())){
 					char c =(char)((carte[i][j].tochar()-32));
 					res = res +  c +"|";
 					}

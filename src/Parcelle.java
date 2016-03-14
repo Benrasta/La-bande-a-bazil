@@ -48,6 +48,12 @@ public class Parcelle {
 	boolean EstPersonage(){
 		return this.estperso;
 	}
+	boolean equals(Parcelle parcelle){
+		if(parcelle.x == this.x && parcelle.y == this.y)
+			return true;
+		else
+			return false;
+	}
 	
 	
 	

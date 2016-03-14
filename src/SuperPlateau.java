@@ -42,7 +42,8 @@ public class SuperPlateau {
 	public static void main(String[] args){
 		
 		Random r=new Random();
-		String[] gifs={"images/arbre.png","images/rocher.png","images/1.navire.png","images/2.navire.png"};
+		String[] gifs={"images/arbre.png","images/rocher.png","images/1.navire.png",
+				"images/2.navire.png","images/mer.png"};
 		Ile carte= new Ile();
 		carte.initialized();
 		int taille =10;
@@ -62,20 +63,22 @@ public class SuperPlateau {
 		*/
 		for (int i=0;i<taille;i++){
 			for (int j=0;j<taille;j++){
-				if(carte.getCarte()[i][j].estbateau && 
-						carte.listbateau.get(0).getP().getX()==i && carte.listbateau.get(0).getP().getY()== j){
-					jeu[i][j]=4;
-				}
-				if(carte.getCarte()[i][j].estbateau && 
-						carte.listbateau.get(0).getP().getX()==i && carte.listbateau.get(1).getP().getY()== j){
-					jeu[i][j]=3;
-				}
-				if(carte.getCarte()[i][j].estelement){
-					jeu[i][j]=2;
-				}
-				if(!carte.getCarte()[i][j].estelement && !carte.getCarte()[i][j].estbateau ){
-					jeu[i][j]=1;
-				}
+				
+					if(carte.getCarte()[i][j].estbateau && 
+							carte.listbateau.get(0).getP().equals(carte.getCarte()[i][j])){
+						jeu[i][j]=4;
+					}
+					if(carte.getCarte()[i][j].estbateau && 
+							carte.listbateau.get(1).getP().equals(carte.getCarte()[i][j])){
+						jeu[i][j]=3;
+					}
+					if(carte.getCarte()[i][j].estelement){
+						jeu[i][j]=2;
+					}
+					if(!carte.getCarte()[i][j].estelement && !carte.getCarte()[i][j].estbateau ){
+						jeu[i][j]=1;
+					}
+				
 			}
 		}
 		p1.setJeu(jeu);

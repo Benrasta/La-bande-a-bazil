@@ -43,5 +43,14 @@ public class Element {
 		return false;
 		}
 	}
+	/*
+	boolean EstEau(){
+		if( this.getElement()==0){
+			return true;
+		}else {
+		return false;
+		}
+	}
+	*/
 	
 }
