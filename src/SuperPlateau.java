@@ -43,10 +43,10 @@ public class SuperPlateau {
 		
 		Random r=new Random();
 		String[] gifs={"images/arbre.png","images/rocher.png","images/1.navire.png",
-				"images/2.navire.png","images/mer.png"};
+				"images/2.navire.png","images/mer.png","images/coffre.png"};
 		Ile carte= new Ile();
 		carte.initialized();
-		int taille =10;
+		int taille =carte.getCarte().length;
 		SuperPlateau p1 = new SuperPlateau(gifs, taille);
 		int[][] jeu=new int[taille][taille];
 		
@@ -74,6 +74,12 @@ public class SuperPlateau {
 					}
 					if(carte.getCarte()[i][j].estelement){
 						jeu[i][j]=2;
+						for(int m = 0;m < carte.listelement.size();m++){
+							if(carte.listelement.get(m).EstCoffre()){
+								jeu[i][j]=6;
+							}
+						}
+						
 					}
 					if(!carte.getCarte()[i][j].estelement && !carte.getCarte()[i][j].estbateau ){
 						jeu[i][j]=1;

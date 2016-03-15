@@ -72,6 +72,9 @@ public class Ile {
 				}
 				
 			}
+			//genere la cle et le coffre
+			this.listelement.get(2).setElement(3);
+			this.listelement.get(1).setElement(1);
 		}
 		
 	
