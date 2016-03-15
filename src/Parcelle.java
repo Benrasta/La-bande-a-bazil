@@ -35,7 +35,7 @@ public class Parcelle {
 		this.y = y;
 			
 	}
-	//changer le SDD, passer en String et non en boolean !!
+	
 	//méthode qui permet de savoir si l'élément est un bateau 
 	boolean EstBateau(){
 		return this.estbateau;
@@ -48,6 +48,7 @@ public class Parcelle {
 	boolean EstPersonage(){
 		return this.estperso;
 	}
+	
 	boolean equals(Parcelle parcelle){
 		if(parcelle.x == this.x && parcelle.y == this.y)
 			return true;

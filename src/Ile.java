@@ -32,9 +32,8 @@ public class Ile {
 		int nbob = (int) ((this.getCarte().length * this.getCarte()[1].length) /10);
 		int equi=2;
 		while(equi >= 1){
-			//coordoné aleatoire d'une parcel pour un bateau
-				//int j = new Random().nextInt(this.getCarte().length);
-				//int k = new Random().nextInt(this.getCarte()[1].length);
+			//coordoné aleatoire d'une parcel pour un bateau sur le contour
+				
 			int j=0;
 			int k =0;
 			int pl= new Random().nextInt(4);
