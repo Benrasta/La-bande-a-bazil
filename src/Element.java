@@ -1,7 +1,7 @@
 
 public class Element {
 	
-	private int element;
+	private int element;		// 1 = rocher, 2 = clef, 3 = coffre
 	private Parcelle pe;
 	
 	public Element(int element,Parcelle pe){
@@ -23,34 +23,14 @@ public class Element {
 
 
 	boolean EstCoffre(){
-		if( this.getElement()==3){
-			return true;
-		}else {
-		return false;
-		}
+		return this.getElement()==3;
+		
 	}
 	boolean EstCle(){
-		if( this.getElement()==2){
-			return true;
-		}else {
-		return false;
-		}
+		return this.getElement()==2;
 	}
 	boolean EstRocher(){
-		if( this.getElement()==1){
-			return true;
-		}else {
-		return false;
-		}
+		return this.getElement()==1;
+		
 	}
-	/*
-	boolean EstEau(){
-		if( this.getElement()==0){
-			return true;
-		}else {
-		return false;
-		}
-	}
-	*/
-	
 }

@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ile {
+
+
 	ArrayList<Personage> listperso;
 	ArrayList<Element> listelement;
 	private Parcelle [][] carte;
@@ -28,11 +30,24 @@ public class Ile {
 				this.carte[i][j]= new Parcelle(i,j);
 			}
 		}
+
+
+		// fait un tableau de boolean de la même taille que l'ile 
+
 		boolean [][] tmmp = new boolean[this.getCarte().length][this.getCarte()[1].length];
+
+		// désigne le nombre de rocher qu'il y aura
+
 		int nbob = (int) ((this.getCarte().length * this.getCarte()[1].length) /10);
+
+		//nombre d'equipe
+
 		int equi=2;
+
 		while(equi >= 1){
-			//coordoné aleatoire d'une parcel pour un bateau sur le contour
+			//coordoné aleatoire d'une parcelle pour un bateau sur le contour
+			
+			// je comprend pas comment ca marche...
 				
 			int j=0;
 			int k =0;
@@ -52,22 +67,24 @@ public class Ile {
 				k=this.getCarte()[1].length-1;
 			}
 
+			// s'il n'y a pas deja un element sur la parcelle
 			if(tmmp[j][k] != true){
-			this.listbateau.add(new Bateau(equi,new Parcelle(j,k)));
-			carte[j][k].estbateau = true;
-			tmmp[j][k] = true;
-			equi --;
+			this.listbateau.add(new Bateau(equi,new Parcelle(j,k)));			
+			carte[j][k].estbateau = true;	// met la parcelle en estBateau 
+			tmmp[j][k] = true;		// il y a un bateau sur la parcelle
+			equi --;			// passe à la deuxieme equipe
 			}
 		}
+
 		//genere les Rochers élatoirement 
 		while(nbob >0){
 			int l = new Random().nextInt(this.getCarte().length);
 			int m = new Random().nextInt(this.getCarte()[1].length);
 			if(tmmp[l][m] != true){
 				this.listelement.add(new Element(1,new Parcelle(l,m)));
-				carte[l][m].estelement=true;
-				tmmp[l][m]= true;
-				nbob =nbob -1;
+				carte[l][m].estelement=true; 	// met le boolean de parcelle en element
+				tmmp[l][m]= true;		// la parcelle est prise
+				nbob =nbob -1;			// nombre de rocher -1
 				}
 				
 			}
@@ -79,7 +96,8 @@ public class Ile {
 	
 	
 	
-	
+	// mode texte
+
 	public String toString(){
 		String res ="+-+-+-+-+-+-+-+-+-+-+"+"\n";
 		for(int i = 0; i<this.getCarte().length;i++ ){
