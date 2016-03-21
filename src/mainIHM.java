@@ -9,20 +9,33 @@ public class mainIHM {
 		String tailtab="";
 		//tand que l'entrer et inferieure a 6 relancer la boite dialogue
 		while(tailtab==""){
-			tailtab= d.showInputDialog(d,"Entrer la taille ( minimum 6 )","taille",JOptionPane.INFORMATION_MESSAGE);
+			tailtab= d.showInputDialog(d,"Entrer la taille ( minimum 7 )","taille",JOptionPane.INFORMATION_MESSAGE);
 			int tcarte= Integer.parseInt(tailtab);
-			if(tcarte <=5){
-				d.showMessageDialog(d, "Le nombre est inferieure à 6","erreur",JOptionPane.WARNING_MESSAGE);
+			if(tcarte <=6){
+				d.showMessageDialog(d, "Le nombre est inferieure à 7","erreur",JOptionPane.WARNING_MESSAGE);
 				tailtab="";
 			}
 		}
+		//tand que l'entrer et inferieure a 10  ou superieure a 50 relancer la boite dialogue 
+		String pourcent= "";
+		int p=0;
+		while(pourcent==""){
+			pourcent= d.showInputDialog(d,"Entrer le pourcentage d'obstacle( minimum 10 et maximum 50 )","%",JOptionPane.INFORMATION_MESSAGE);
+			p= Integer.parseInt(pourcent);
+			if(p <=9||p >=51){
+				d.showMessageDialog(d, "Le nombre est inferieure à 100 ou superieure a 50","erreur",JOptionPane.WARNING_MESSAGE);
+				pourcent="";
+			}
+		}
+		
 		//initialisation de la carte et du superplateau
 		Random r=new Random();
 		String[] gifs={"images/arbre.png","images/rocher.png","images/1.navire.png",
 				"images/2.navire.png","images/mer.png","images/coffre.png"};
 		int tcarte= Integer.parseInt(tailtab);
+		
 		Ile carte= new Ile(tcarte,tcarte);
-		carte.initialized();
+		carte.initialized(p);
 		int taille =carte.getCarte().length+2;
 		SuperPlateau p1 = new SuperPlateau(gifs, taille);
 		int[][] jeu=new int[taille][taille];

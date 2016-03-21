@@ -28,7 +28,11 @@ public class Parcelle {
 		this.y = y;
 	}
 	
-	//constructeur de parcelle qui prend en paramètre des coordonnées et les affectent à une parcelle;
+	/**
+	 * constructeur de parcelle qui prend en paramètre des coordonnées et les affectent à une parcelle;
+	 * @param x
+	 * @param y
+	 */
 	public Parcelle (int x, int y){
 		
 		this.x = x;
@@ -36,19 +40,33 @@ public class Parcelle {
 			
 	}
 	
-	//méthode qui permet de savoir si l'élément est un bateau 
+	/**
+	 * méthode qui permet de savoir si l'élément est un bateau 
+	 * @return
+	 */
 	boolean EstBateau(){
 		return this.estbateau;
 		
 	}
+	/**
+	 * méthode qui permet de savoir si l'élément est un element
+	 * @return
+	 */
 	boolean EstElement(){
 		return this.estelement;
 	}
-	
+	/**
+	 * méthode qui permet de savoir si l'élément est un personage
+	 * @return
+	 */
 	boolean EstPersonage(){
 		return this.estperso;
 	}
-	
+	/**
+	 * revoie vrai si la parcelle courante et meme que celle passer en paramètre
+	 * @param parcelle
+	 * @return
+	 */
 	boolean equals(Parcelle parcelle){
 		if(parcelle.x == this.x && parcelle.y == this.y)
 			return true;
@@ -57,7 +75,10 @@ public class Parcelle {
 	}
 	
 	
-	
+	/**
+	 * revoie sous forme de charactaire la parcel courante
+	 * @return
+	 */
 	public char tochar(){
 		char res =' ';
 		if(this.EstBateau()){

@@ -45,7 +45,7 @@ public class SuperPlateau {
 		String[] gifs={"images/arbre.png","images/rocher.png","images/1.navire.png",
 				"images/2.navire.png","images/mer.png","images/coffre.png"};
 		Ile carte= new Ile();
-		carte.initialized();
+		carte.initialized(10);
 		int taille =carte.getCarte().length;
 		SuperPlateau p1 = new SuperPlateau(gifs, taille);
 		int[][] jeu=new int[taille][taille];
