@@ -10,7 +10,7 @@ public class Parcelle {
 	boolean estbateau = false;
 	boolean estperso = false;
 	boolean estelement =false;
-
+	boolean estEau = false;
 
 	private int x, y;  // coordonnées de la parcelle; 
 	
@@ -44,7 +44,7 @@ public class Parcelle {
 	 * méthode qui permet de savoir si l'élément est un bateau 
 	 * @return
 	 */
-	boolean EstBateau(){
+	public boolean EstBateau(){
 		return this.estbateau;
 		
 	}
@@ -52,14 +52,14 @@ public class Parcelle {
 	 * méthode qui permet de savoir si l'élément est un element
 	 * @return
 	 */
-	boolean EstElement(){
+	public boolean EstElement(){
 		return this.estelement;
 	}
 	/**
 	 * méthode qui permet de savoir si l'élément est un personage
 	 * @return
 	 */
-	boolean EstPersonage(){
+	public boolean EstPersonage(){
 		return this.estperso;
 	}
 	/**
@@ -72,6 +72,10 @@ public class Parcelle {
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean EstEau(){
+		return this.estEau;
 	}
 	
 	

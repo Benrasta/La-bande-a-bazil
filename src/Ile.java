@@ -8,6 +8,7 @@ public class Ile {
 	ArrayList<Element> listelement;
 	private Parcelle [][] carte;
 	 ArrayList<Bateau> listbateau;
+
 	/**
 	 * constructeur sans paramètre qui construit une carte de 10 sur 10
 	 */
@@ -16,6 +17,7 @@ public class Ile {
 		this.listperso=new ArrayList<>();
 		this.listelement=new ArrayList<>();
 		this.listbateau=new ArrayList<>();
+
 	}
 	/**
 	 * contruit une carte de taille x,y
@@ -27,12 +29,15 @@ public class Ile {
 		this.listperso=new ArrayList<>();
 		this.listelement=new ArrayList<>();
 		this.listbateau=new ArrayList<>();
+
 	}
 	
 	/**
 	 * initialisation de l'Ile avec placement des eléments et des bateaux
 	 */
 	public void initialized(int po){
+		
+
 		//initialize le tableau et creation des parcel;
 		for(int i = 0; i<this.getCarte().length;i++ ){
 			for(int j = 0; j < this.getCarte()[1].length;j++ ){
@@ -47,8 +52,10 @@ public class Ile {
 
 		// désigne le nombre de rocher qu'il y aura
 
+		
 		int nbob =(int) ((this.getCarte().length * this.getCarte()[1].length)* po/100);
 
+		
 		//nombre d'equipe
 
 		int equi=2;
@@ -59,21 +66,12 @@ public class Ile {
 			// je comprend pas comment ca marche...
 				
 			int j=0;
-			int k =0;
-			int pl= new Random().nextInt(4);
-			if(pl == 0){
-				j = new Random().nextInt(this.getCarte().length-1)+1;
-			}
-			if(pl==1){
-				k = new Random().nextInt(this.getCarte()[1].length-1)+1;
-			}
-			if(pl==2){
-				j=this.getCarte().length-1;
-				k = new Random().nextInt(this.getCarte()[1].length-1)+1;
-			}
-			if(pl==3){
-				j = new Random().nextInt(this.getCarte().length-1)+1;
-				k=this.getCarte()[1].length-1;
+			int k =1;
+			if(equi ==2){
+				k  = new Random().nextInt(this.getCarte()[1].length-1)+1;
+			} else {
+				j=this.getCarte()[1].length-1;
+				k  = new Random().nextInt(this.getCarte()[1].length-1)+1;
 			}
 
 			// s'il n'y a pas deja un element sur la parcelle
@@ -84,47 +82,50 @@ public class Ile {
 			equi --;			// passe à la deuxieme equipe
 			}
 		}
-		/*
+		
 		//crétion du chemin
 		Random r= new Random();
 		Parcelle p = new Parcelle(this.listbateau.get(0).getP().getX(),this.listbateau.get(0).getP().getY());
-		int largeur =carte.length;
-		int hauteur = carte[1].length;
+		int largeur =this.listbateau.get(1).getP().getX();
+		int hauteur = this.listbateau.get(1).getP().getY();
 		//bug boucle infini;
-		while (p.getX() != largeur - 1 || p.getY() != hauteur - 1) {
-			Parcelle init = p;
-			if (r.nextBoolean()) {
-				if (p.getX() + 1 <= largeur - 1) {
-					p = new Parcelle(p.getX() + 1, p.getY());
-				} else {
-					if (p.getY() + 1 <= hauteur - 1) {
-						p = new Parcelle(p.getX(), p.getY() + 1);
-					}
-				}
-			} else {
-				if (p.getY() + 1 <= hauteur - 1) {
-					p = new Parcelle(p.getX(), p.getY() + 1);
-				} else {
-					if (p.getX() + 1 <= largeur - 1) {
-						p = new Parcelle(p.getX() + 1, p.getY());
-					}
+		
+		System.out.println(this.listbateau.get(1).getP().getX()+" " +this.listbateau.get(1).getP().getY());
+		
+		while (p.getX() != largeur){
+			if(p.getX()!= largeur){
+				if(p.getX()< largeur){
+					p.setX(p.getX()+1);
+				} else{
+					if(p.getX() >largeur){
+						p.setX(p.getX()-1);
+					} 
 				}
 			}
-			if (tmmp[p.getX()][p.getY()] != true) {
-				tmmp[p.getX()][p.getY()] = true;
-			} else {
-				p = init;
-			}
+			tmmp[p.getX()][p.getY()] = true;
 		}
-		*/
+		while (p.getY() != hauteur){
+			if(p.getX()==largeur && p.getY() != hauteur){
+				if( p.getY() < hauteur){
+					p.setY(p.getY()+1);
+				} else{
+					if( p.getY()> hauteur){
+						p.setY(p.getY()-1);
+					}
+				}
+			}
+			tmmp[p.getX()][p.getY()] = true;
+		}
+		
+		
+		
 		
 
 		//genere les Rochers élatoirement 
 		while(nbob >0){
 			int l = new Random().nextInt(this.getCarte().length);
 			int m = new Random().nextInt(this.getCarte()[1].length);
-			if(tmmp[l][m] != true && l !=0 && m !=0 
-					&& l !=this.getCarte().length-1 && m!=this.getCarte()[1].length-1 ){
+			if(tmmp[l][m] != true && l !=0 ){
 				this.listelement.add(new Element(1,new Parcelle(l,m)));
 				carte[l][m].estelement=true; 	// met le boolean de parcelle en element
 				tmmp[l][m]= true;		// la parcelle est prise
@@ -166,6 +167,7 @@ public class Ile {
 		}
 		return res;
 	}
+	
 	
 	
 	/**
