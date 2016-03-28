@@ -10,7 +10,8 @@ public class Parcelle {
 	boolean estbateau = false;
 	boolean estperso = false;
 	boolean estelement =false;
-	boolean estEau = false;
+	boolean estCoffre = false;
+	
 
 	private int x, y;  // coordonnées de la parcelle; 
 	
@@ -48,6 +49,12 @@ public class Parcelle {
 		return this.estbateau;
 		
 	}
+	
+	
+	public boolean EstCoffre(){
+		return this.estCoffre;
+	}
+	
 	/**
 	 * méthode qui permet de savoir si l'élément est un element
 	 * @return
@@ -74,9 +81,6 @@ public class Parcelle {
 			return false;
 	}
 	
-	public boolean EstEau(){
-		return this.estEau;
-	}
 	
 	
 	/**

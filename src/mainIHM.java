@@ -53,15 +53,18 @@ public class mainIHM {
 					}
 					if(carte.getCarte()[i-1][j-1].estelement){
 						jeu[i][j]=2;
-						/*
-						if(carte.listelement.get(2).getPe().equals(carte.getCarte()[i-1][j-1])){
-								jeu[i][j]=6;
-							}
-							*/						
+						if(carte.listelement.get(0).getPe().equals(carte.getCarte()[i-1][j-1])){
+							jeu[i][j]=6;
+							
+						}
 					}
-					if(!carte.getCarte()[i-1][j-1].estelement && !carte.getCarte()[i-1][j-1].estbateau ){
+					
+					
+					
+					if(!carte.getCarte()[i-1][j-1].estelement && !carte.getCarte()[i-1][j-1].estbateau){
 						jeu[i][j]=1;
 					}
+					
 				}else{
 					jeu[i][j]=5;
 				}

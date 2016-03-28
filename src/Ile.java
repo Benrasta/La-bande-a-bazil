@@ -7,7 +7,7 @@ public class Ile {
 	ArrayList<Personage> listperso;
 	ArrayList<Element> listelement;
 	private Parcelle [][] carte;
-	 ArrayList<Bateau> listbateau;
+	ArrayList<Bateau> listbateau;
 
 	/**
 	 * constructeur sans paramètre qui construit une carte de 10 sur 10
@@ -88,10 +88,7 @@ public class Ile {
 		Parcelle p = new Parcelle(this.listbateau.get(0).getP().getX(),this.listbateau.get(0).getP().getY());
 		int largeur =this.listbateau.get(1).getP().getX();
 		int hauteur = this.listbateau.get(1).getP().getY();
-		//bug boucle infini;
-		
-		System.out.println(this.listbateau.get(1).getP().getX()+" " +this.listbateau.get(1).getP().getY());
-		
+		//genere une parti du chemin en x
 		while (p.getX() != largeur){
 			if(p.getX()!= largeur){
 				if(p.getX()< largeur){
@@ -104,6 +101,7 @@ public class Ile {
 			}
 			tmmp[p.getX()][p.getY()] = true;
 		}
+		//genere une parti du chemin en y
 		while (p.getY() != hauteur){
 			if(p.getX()==largeur && p.getY() != hauteur){
 				if( p.getY() < hauteur){
@@ -117,15 +115,27 @@ public class Ile {
 			tmmp[p.getX()][p.getY()] = true;
 		}
 		
-		
-		
-		
-
+		//generation de la clef et du coffre a coter du chemin
+		int id =3;
+		while(id>0){
+			int i= new Random().nextInt(this.getCarte().length);
+			int j= new Random().nextInt(this.getCarte().length);
+			if( i!=0 && j!=0 && i!=this.getCarte().length-1 && j!=this.getCarte().length-1 && tmmp[i][j]!=true){
+				if(tmmp[i+1][j] || tmmp[i][j+1] || tmmp[i-1][j] || tmmp[i][j-1]){
+					this.listelement.add(new Element(id,new Parcelle(i,j)));
+					id--;
+					tmmp[i][j]=true;
+					carte[i][j].estelement=true;
+					System.out.println(i +" " + j);
+				}
+			}
+		}
+		System.out.println(this.listelement.get(0).getPe().getX()+" "+this.listelement.get(0).getPe().getY());
 		//genere les Rochers élatoirement 
 		while(nbob >0){
 			int l = new Random().nextInt(this.getCarte().length);
 			int m = new Random().nextInt(this.getCarte()[1].length);
-			if(tmmp[l][m] != true && l !=0 ){
+			if(tmmp[l][m] != true ){
 				this.listelement.add(new Element(1,new Parcelle(l,m)));
 				carte[l][m].estelement=true; 	// met le boolean de parcelle en element
 				tmmp[l][m]= true;		// la parcelle est prise
@@ -133,9 +143,8 @@ public class Ile {
 				}
 				
 			}
-			//genere la cle et le coffre
-			this.listelement.get(2).setElement(3);
-			this.listelement.get(1).setElement(1);
+		
+			
 		}
 		
 	
