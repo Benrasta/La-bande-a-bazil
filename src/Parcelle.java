@@ -11,6 +11,7 @@ public class Parcelle {
 	boolean estperso = false;
 	boolean estelement =false;
 	boolean estCoffre = false;
+
 	
 
 	private int x, y;  // coordonnées de la parcelle; 
@@ -34,12 +35,14 @@ public class Parcelle {
 	 * @param x
 	 * @param y
 	 */
+	
 	public Parcelle (int x, int y){
 		
 		this.x = x;
 		this.y = y;
 			
 	}
+	
 	
 	/**
 	 * méthode qui permet de savoir si l'élément est un bateau 
@@ -98,12 +101,19 @@ public class Parcelle {
 				res =' ';
 			}
 		}
-		
+		if(this.estperso && !this.EstBateau()){
+			res ='p';
+		}
+		if(this.estCoffre){
+			res ='C';
+		}
 		return res;
 	}
+
 	
+
 	
-}
+	}
 	
 	
 	

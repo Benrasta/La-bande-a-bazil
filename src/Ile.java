@@ -7,7 +7,7 @@ public class Ile {
 	ArrayList<Personage> listperso;
 	ArrayList<Element> listelement;
 	private Parcelle [][] carte;
-	ArrayList<Bateau> listbateau;
+	public ArrayList<Bateau> listbateau;
 
 	/**
 	 * constructeur sans paramètre qui construit une carte de 10 sur 10
@@ -126,11 +126,11 @@ public class Ile {
 					id--;
 					tmmp[i][j]=true;
 					carte[i][j].estelement=true;
-					System.out.println(i +" " + j);
+					//System.out.println(i +" " + j);
 				}
 			}
 		}
-		System.out.println(this.listelement.get(0).getPe().getX()+" "+this.listelement.get(0).getPe().getY());
+		//System.out.println(this.listelement.get(0).getPe().getX()+" "+this.listelement.get(0).getPe().getY());
 		//genere les Rochers élatoirement 
 		while(nbob >0){
 			int l = new Random().nextInt(this.getCarte().length);

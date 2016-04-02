@@ -1,8 +1,16 @@
 import java.util.Random;
 import javax.swing.*;
+import java.awt.*;
+import com.sun.glass.events.MouseEvent;
 
 public class mainIHM {
 
+	
+	
+	
+	
+	
+	
 	public static void main(String args[]){
 		//boite de dialogue 
 		JOptionPane d = new JOptionPane();
@@ -31,18 +39,20 @@ public class mainIHM {
 		//initialisation de la carte et du superplateau
 		Random r=new Random();
 		String[] gifs={"images/arbre.png","images/rocher.png","images/1.navire.png",
-				"images/2.navire.png","images/mer.png","images/coffre.png"};
+				"images/2.navire.png","images/mer.png","images/coffre.png",
+				"images/1.explorateur.png","images/.explorateur.png"};
 		int tcarte= Integer.parseInt(tailtab);
 		
 		Ile carte= new Ile(tcarte,tcarte);
 		carte.initialized(p);
 		int taille =carte.getCarte().length+2;
-		SuperPlateau p1 = new SuperPlateau(gifs, taille);
+		SuperPlateauIterable p1 = new SuperPlateauIterable(gifs, taille,true);
 		int[][] jeu=new int[taille][taille];
 		//affectation de la carte dans un tableau d'entiers
 		for (int i=0;i<taille;i++){
 			for (int j=0;j<taille;j++){
 				if(i>0 && j>0 && i<=carte.getCarte().length && j<=carte.getCarte().length){
+					
 					if(carte.getCarte()[i-1][j-1].estbateau && 
 							carte.listbateau.get(0).getP().equals(carte.getCarte()[i-1][j-1])){
 						jeu[i][j]=4;
@@ -70,23 +80,25 @@ public class mainIHM {
 				}
 			}
 		}
-		/*
-		int[][] jeu2 = new int[taille+2][taille+2];
-		for (int i=0;i<taille+2;i++){
-			for (int j=0;j<taille+2;j++){
-				if(i!=0 && j!=0 &&i!=taille && j!=taille ){
-					jeu2[i+1][j+1]=jeu[i][j];
-				}else{
-					jeu2[i][j]=5;
-				}
-
-			}
-		}
-		*/
+		
+		Personage pe1 = new Explorateur(1, 100, carte.listbateau.get(0).getP());
+		Personage pe2 = new Explorateur(2, 100, carte.listbateau.get(1).getP());
+		carte.listperso.add(pe1);
+		carte.listperso.add(pe2);
+		
+		
+		
 		
 		
 		p1.setJeu(jeu);
 		p1.affichage();
+		/*
+		while(true){
+		MouseEvent m1 =new MouseEvent();
+				
+		}
+		*/
+		
 		
 	}
 }

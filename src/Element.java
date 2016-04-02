@@ -3,6 +3,7 @@ public class Element {
 	
 	private int element;		// 1 = rocher, 2 = clef, 3 = coffre
 	private Parcelle pe;
+	private boolean tresor=false;
 	/**
 	 * construit un element
 	 * @param element
@@ -11,6 +12,10 @@ public class Element {
 	public Element(int element,Parcelle pe){
 		this.element=element;
 		this.pe=pe;
+		if(this.EstCoffre()){
+			setTresor(true);
+			pe.estCoffre=true;
+		}
 	}
 	/**
 	 * renvoie le type de l'element
@@ -57,5 +62,11 @@ public class Element {
 	boolean EstRocher(){
 		return this.getElement()==1;
 		
+	}
+	public boolean isTresor() {
+		return tresor;
+	}
+	public void setTresor(boolean tresor) {
+		this.tresor = tresor;
 	}
 }
