@@ -1,6 +1,6 @@
 
 public abstract class Personage {
-	
+	private boolean aArme;
 	private int equipe;
 	private int energie;
 	private Parcelle p;
@@ -40,9 +40,33 @@ public abstract class Personage {
 
 	public String toString(){
 		if(this.equipe ==1){
-			return "P";
+			if(this instanceof Guerrier){
+				return "G";
+			}else{
+				if(this instanceof Piegeur){
+					return "P";
+				}else{
+					if(this instanceof Voleur){
+						return "V";
+					}else{
+						return "E";
+					}
+				}
+			}
 		}else{
-			return "p";
+			if(this instanceof Guerrier){
+				return "g";
+			}else{
+				if(this instanceof Piegeur){
+					return "p";
+				}else{
+					if(this instanceof Voleur){
+						return "v";
+					}else{
+						return "e";
+					}
+				}
+			}
 		}
 		
 	}
@@ -63,6 +87,14 @@ public abstract class Personage {
 
 	public void setaClef(boolean aClef) {
 		this.aClef = aClef;
+	}
+
+	public boolean isaArme() {
+		return aArme;
+	}
+
+	public void setaArme(boolean aArme) {
+		this.aArme = aArme;
 	}
 		
 	

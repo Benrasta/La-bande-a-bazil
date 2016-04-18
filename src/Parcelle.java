@@ -11,6 +11,7 @@ public class Parcelle {
 	boolean estperso = false;
 	boolean estelement =false;
 	boolean estCoffre = false;
+	boolean estMine= false;
 
 	
 
@@ -87,28 +88,23 @@ public class Parcelle {
 	
 	
 	/**
-	 * revoie sous forme de charactaire la parcel courante
+	 * revoie sous forme de String la parcel courante
 	 * @return
 	 */
-	public char tochar(){
-		char res =' ';
-		if(this.EstBateau()){
-			res='b'; 
-		}else {
+	public String toString(){
+		String res =" " ;
 			if(this.EstElement()){
-				res='R';
+				res="R";
 			}else {
-				res =' ';
+				res =" " ;
 			}
-		}
-		if(this.estperso && !this.EstBateau()){
-			res ='p';
-		}
+		
 		if(this.estCoffre){
-			res ='C';
+			res ="C";
 		}
 		return res;
 	}
+	
 
 	
 

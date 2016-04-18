@@ -11,16 +11,20 @@ public class Deplacement extends Action {
 		int cx=cible.getX();
 		int cy=cible.getY();
 		
-		if( p instanceof Voleur){
+		if( p instanceof Voleur || p instanceof Guerrier || p instanceof Piegeur){
 			//verifie si la cible est a porté du voleur
 			if(!cible.estelement && !cible.estperso ){
 				if( (px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
 					|| (px-1==cx && py==cy) || (px+1==cx && py==cy)
 					|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy)){
-					
+					p.setEnergie(p.getEnergie()-5);
 					if(cible.equals(ile.listbateau.get(p.getEquipe()-1))){
 						ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
 						ile.listperso.add(p);
+						p.setEnergie(100);
+						if(p instanceof Guerrier){
+							p.setaArme(true);
+						}
 					}else{
 						if(p.getP().equals(ile.listbateau.get(p.getEquipe()-1))){
 							ile.listperso.remove(p);
@@ -30,10 +34,15 @@ public class Deplacement extends Action {
 					// p prend pour parcelle la cible
 					ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
 					p.setP(cible);
-					p.setEnergie(p.getEnergie()-5);
-					System.out.println(p.toString() +" se deplace en "+ cible.getX()+","+cible.getY() );
-						cible.estperso=true;
+					if(cible.estMine){
+						p.setEnergie(p.getEnergie()-10);
+						cible.estMine=false;
+					}
 					
+					System.out.println(p.toString() +" se deplace en "+ cible.getX()+","+cible.getY() );
+					if(!cible.estbateau){
+					cible.estperso=true;
+					}	
 					
 			}	
 			}
@@ -42,10 +51,11 @@ public class Deplacement extends Action {
 				if(!cible.estelement &&  !cible.estperso){
 					//verifie si la cible et a porté de l'explorateur
 					if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
-						
+						p.setEnergie(p.getEnergie()-5);
 						if(cible.equals(ile.listbateau.get(p.getEquipe()-1))){
 							//ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
 							ile.listperso.add(p);
+							p.setEnergie(100);
 						}else{
 							if(p.getP().equals(ile.listbateau.get(p.getEquipe()-1))){
 								ile.listperso.remove(p);
@@ -56,10 +66,14 @@ public class Deplacement extends Action {
 						// p prend pour parcelle la cible
 						ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
 						p.setP(cible);
-						p.setEnergie(p.getEnergie()-5);
+						if(cible.estMine){
+							p.setEnergie(p.getEnergie()-10);
+							cible.estMine=false;
+						}
 						System.out.println(p.toString() +" se deplace en "+ cible.getX()+","+cible.getY() );
-						
-						cible.estperso=true;
+						if(!cible.EstBateau()){
+							cible.estperso=true;
+							}
 						}
 					}
 				

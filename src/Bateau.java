@@ -45,5 +45,13 @@ public class Bateau {
 		this.equipe = equipe;
 	}
 	
+	public String toString(){
+		if(this.getEquipe()==1){
+			return "B";
+		}else{
+			return "b";
+		}
+	}
+	
 	
 }

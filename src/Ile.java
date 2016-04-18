@@ -8,7 +8,7 @@ public class Ile {
 	ArrayList<Element> listelement;
 	private Parcelle [][] carte;
 	public ArrayList<Bateau> listbateau;
-
+	ArrayList<Mine> listmine;
 	/**
 	 * constructeur sans paramètre qui construit une carte de 10 sur 10
 	 */
@@ -17,7 +17,7 @@ public class Ile {
 		this.listperso=new ArrayList<>();
 		this.listelement=new ArrayList<>();
 		this.listbateau=new ArrayList<>();
-
+		this.listmine=new ArrayList<>();
 	}
 	/**
 	 * contruit une carte de taille x,y
@@ -29,7 +29,7 @@ public class Ile {
 		this.listperso=new ArrayList<>();
 		this.listelement=new ArrayList<>();
 		this.listbateau=new ArrayList<>();
-
+		this.listmine=new ArrayList<>();
 	}
 	
 	/**
@@ -161,15 +161,33 @@ public class Ile {
 			for(int j = 0; j < this.getCarte()[1].length;j++ ){
 				
 				if(carte[i][j].estbateau){
-					if(carte[i][j].equals(this.listbateau.get(0).getP())){
-					char c =(char)((carte[i][j].tochar()-32));
-					res = res +  c +"|";
-					}
-					else{
-					res = res + carte[i][j].tochar()+  "|";
+					for(int x= 0 ;x <this.listbateau.size(); x++){
+						if(carte[i][j].equals(this.listbateau.get(x).getP())){
+							res= res +this.listbateau.get(x).toString() + "|";
+						}
 					}
 				}else{
-					res = res + carte[i][j].tochar()+  "|";
+					if(carte[i][j].estperso){
+						for(int x =0;  x < this.listperso.size(); x++){
+							if(carte[i][j].equals(this.listperso.get(x).getP())){
+								res= res + this.listperso.get(x).toString();
+							}
+						}
+						
+					} else{
+						if(carte[i][j].estMine){
+							for(int x = 0; x < this.listmine.size();x++){
+								if(carte[i][j].equals(this.listmine.get(x).getPmine())){
+									res= res + this.listmine.get(x).toString();
+								}
+							}
+						} else{
+							res = res + carte[i][j].toString()+  "|";
+						}
+					}
+					
+					
+					
 				}
 			}
 			res =res+"\n" +"+-+-+-+-+-+-+-+-+-+-+"+"\n";
@@ -177,7 +195,7 @@ public class Ile {
 		return res;
 	}
 	
-	
+	// 
 	
 	/**
 	 * revoie la carte courante

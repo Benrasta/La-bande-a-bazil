@@ -7,6 +7,9 @@ public class Voleur extends Personage{
 		super(equipe, energie, p);
 		
 	}
+	/**
+	 * action du voleur(chance de volé un objet a  l'adersaire
+	 */
 	public void Agit(Parcelle cible,Ile ile){
 		int chance = new Random().nextInt(100);
 		int px=this.getP().getX();
@@ -32,18 +35,22 @@ public class Voleur extends Personage{
 								if(ile.listperso.get(i).isaTresor()&& chance >=50){
 									ile.listperso.get(i).setaTresor(false);
 									this.setaTresor(true);
+								} else {
+									if(ile.listperso.get(i) instanceof Guerrier && ile.listperso.get(i).isaArme()&& chance >=50 ){
+									ile.listperso.get(i).setaArme(false);
+									}
 								}
 							}
+							
 						}
-						
 					}
 				}
+				this.setEnergie(this.getEnergie()-5);
 			}
-			this.setEnergie(this.getEnergie()-5);
 		}
+	
+	
+	
+	
 	}
-	
-	
-	
-	
 }
