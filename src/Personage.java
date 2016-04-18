@@ -6,6 +6,7 @@ public abstract class Personage {
 	private Parcelle p;
 	private boolean aClef;
 	private boolean aTresor;
+	private int nbMine;
 		
 	public Personage(int equipe,int energie,Parcelle p){
 		this.equipe=equipe;
@@ -95,6 +96,14 @@ public abstract class Personage {
 
 	public void setaArme(boolean aArme) {
 		this.aArme = aArme;
+	}
+
+	public int getNbMine() {
+		return nbMine;
+	}
+
+	public void setNbMine(int nbMine) {
+		this.nbMine = nbMine;
 	}
 		
 	

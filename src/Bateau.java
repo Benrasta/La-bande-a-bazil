@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Bateau {
 	private int equipe;
 	private Parcelle p;
-	private ArrayList<Personage> lp;
+	 ArrayList<Personage> lp;
+	private boolean tresor;
 	
 	/**
 	 * contruit un bateau
@@ -11,6 +12,7 @@ public class Bateau {
 	 * @param p
 	 */
 	public Bateau(int equipe,Parcelle p){
+		this.setTresor(false);
 		this.p=p;
 		this.equipe=equipe;
 		this.lp= new ArrayList<Personage>();
@@ -27,9 +29,7 @@ public class Bateau {
 	 * revoie la liste des personnage contenue dans le bateau
 	 * @return
 	 */
-	public ArrayList<Personage> getLp() {
-		return lp;
-	}
+	
 	/**
 	 * revoie l'equipe a qui apartien le bateau
 	 * @return
@@ -51,6 +51,12 @@ public class Bateau {
 		}else{
 			return "b";
 		}
+	}
+	public boolean isTresor() {
+		return tresor;
+	}
+	public void setTresor(boolean tresor) {
+		this.tresor = tresor;
 	}
 	
 	

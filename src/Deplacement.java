@@ -18,22 +18,28 @@ public class Deplacement extends Action {
 					|| (px-1==cx && py==cy) || (px+1==cx && py==cy)
 					|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy)){
 					p.setEnergie(p.getEnergie()-5);
+					
+					// p prend pour parcelle la cible
+					ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
+					p.setP(cible);
+					
 					if(cible.equals(ile.listbateau.get(p.getEquipe()-1))){
 						ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
-						ile.listperso.add(p);
+						ile.listbateau.get(p.getEquipe()-1).lp.add(p);
 						p.setEnergie(100);
+						if(p.isaTresor()){
+							ile.listbateau.get(p.getEquipe()-1).setTresor(true);
+						}
 						if(p instanceof Guerrier){
 							p.setaArme(true);
 						}
 					}else{
 						if(p.getP().equals(ile.listbateau.get(p.getEquipe()-1))){
-							ile.listperso.remove(p);
+							ile.listbateau.get(p.getEquipe()-1).lp.remove(p);
 						}
 					}
 					
-					// p prend pour parcelle la cible
-					ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
-					p.setP(cible);
+					
 					if(cible.estMine){
 						p.setEnergie(p.getEnergie()-10);
 						cible.estMine=false;
@@ -52,20 +58,26 @@ public class Deplacement extends Action {
 					//verifie si la cible et a porté de l'explorateur
 					if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
 						p.setEnergie(p.getEnergie()-5);
+						
+						// p prend pour parcelle la cible
+						ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
+						p.setP(cible);
+						
 						if(cible.equals(ile.listbateau.get(p.getEquipe()-1))){
 							//ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
-							ile.listperso.add(p);
+							ile.listbateau.get(p.getEquipe()-1).lp.add(p);
 							p.setEnergie(100);
+							if(p.isaTresor()){
+								ile.listbateau.get(p.getEquipe()-1).setTresor(true);
+							}
 						}else{
 							if(p.getP().equals(ile.listbateau.get(p.getEquipe()-1))){
-								ile.listperso.remove(p);
+								ile.listbateau.get(p.getEquipe()-1).lp.remove(p);
 							}
 						}
 						
 					
-						// p prend pour parcelle la cible
-						ile.getCarte()[p.getP().getX()][p.getP().getY()].estperso=false;
-						p.setP(cible);
+						
 						if(cible.estMine){
 							p.setEnergie(p.getEnergie()-10);
 							cible.estMine=false;
