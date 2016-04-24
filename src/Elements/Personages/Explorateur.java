@@ -16,23 +16,32 @@ public class Explorateur extends Personage{
 		int py=this.getP().getY();
 		int cx=cible.getX();
 		int cy=cible.getY();
-		if( (px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
-				|| (px-1==cx && py==cy) || (px+1==cx && py==cy)
-				|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy)){
+		if( (px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px-1==cx && py==cy) || (py+1==cy && px==cx)){
 			if(cible.getEstElement()){
+				
+				setaction(false);
 			
 				if(ile.getlistelement().get(1).getPe().equals(cible)){
 					//explorateur prend clef
+					System.out.println("Vous avez trouvez la clef");
 					this.setaClef(true);
 					// la clef est retirer de la carte
 					ile.getlistelement().get(1).setElement(1);;
-				}			
-				if(ile.getlistelement().get(0).getPe().equals(cible)
+				}else if(ile.getlistelement().get(0).getPe().equals(cible)
 						&& this.isaClef()  ){
 					//explorateur prend letrésord
+					System.out.println("Vous avez trouvez le tresor");
 					this.setaTresor(true);
 					//le coffre se vide
 					ile.getlistelement().get(0).setTresor(false);
+				}else if(ile.getlistelement().get(0).getPe().equals(cible)){
+					System.out.println("Vous avez trouvez le coffre, mais vous n'avez pas la clef");
+				}else{
+					System.out.println("Vous n'avez rien trouvez");
+				}
+				this.setEnergie(this.getEnergie()-5);
+				if(this.getEnergie()<=0){
+					this.mort(ile);
 				}
 			}
 				
@@ -40,7 +49,9 @@ public class Explorateur extends Personage{
 	}
 			
 		
-	
+	public String getnom(){
+		return "Explorateur";
+	}
 	
 	
 }

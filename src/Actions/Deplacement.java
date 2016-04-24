@@ -31,18 +31,24 @@ public class Deplacement extends Action {
 				if( (px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
 					|| (px-1==cx && py==cy) || (px+1==cx && py==cy)
 					|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy)){
-					p.setEnergie(p.getEnergie()-5);
+					p.setEnergie(p.getEnergie()-1);
+					if (p.getEnergie()<=0){
+						p.mort(ile);
+					}
 					
 					// p prend pour parcelle la cible
 					ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 					p.setP(cible);
+					p.setaction(false);
+					ile.affichage();
 					
 					if(cible.equals(ile.getlistbateau().get(p.getEquipe()-1))){
 						ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 						ile.getlistbateau().get(p.getEquipe()-1).lp.add(p);
-						p.setEnergie(100);
+						//p.setEnergie(100);
 						if(p.isaTresor()){
 							ile.getlistbateau().get(p.getEquipe()-1).setTresor(true);
+							ile.FinDeJeu(p.getEquipe());
 						}
 						if(p instanceof Guerrier){
 							p.setaArme(true);
@@ -55,8 +61,7 @@ public class Deplacement extends Action {
 					
 					
 					if(cible.getEstMine()){
-						p.setEnergie(p.getEnergie()-10);
-						cible.setEstMine(false);
+						p.dansMine();
 					}
 					
 					System.out.println(p.toString() +" se deplace en "+ cible.getX()+","+cible.getY() );
@@ -71,18 +76,22 @@ public class Deplacement extends Action {
 				if(!cible.getEstElement() &&  !cible.getEstPersonage()){
 					//verifie si la cible et a porté de l'explorateur
 					if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
-						p.setEnergie(p.getEnergie()-5);
+						p.setEnergie(p.getEnergie()-1);
+						if(p.getEnergie()<=0){
+							p.mort(ile);
+						}
 						
 						// p prend pour parcelle la cible
 						ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 						p.setP(cible);
-						
+						p.setaction(false);
 						if(cible.equals(ile.getlistbateau().get(p.getEquipe()-1))){
 							//ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 							ile.getlistbateau().get(p.getEquipe()-1).lp.add(p);
 							p.setEnergie(100);
 							if(p.isaTresor()){
 								ile.getlistbateau().get(p.getEquipe()-1).setTresor(true);
+								ile.FinDeJeu(p.getEquipe());
 							}
 						}else{
 							if(p.getP().equals(ile.getlistbateau().get(p.getEquipe()-1))){
@@ -93,8 +102,7 @@ public class Deplacement extends Action {
 					
 						
 						if(cible.getEstMine()){
-							p.setEnergie(p.getEnergie()-10);
-							cible.setEstMine(false);
+							p.dansMine();
 						}
 						System.out.println(p.toString() +" se deplace en "+ cible.getX()+","+cible.getY() );
 						if(!cible.getEstBateau()){
@@ -107,10 +115,7 @@ public class Deplacement extends Action {
 				System.out.println(p.toString() +" ne peux se déplacé en "+ cible.getX()+","+cible.getY() );
 				}
 			}
+		ile.affichage();
 		}
-		
-	
-	
-	
-	
+			
 }

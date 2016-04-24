@@ -21,14 +21,22 @@ public class Guerrier extends Personage {
 			int py=this.getP().getY();
 			int cx=cible.getX();
 			int cy=cible.getY();
-			if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
+			if((px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
+					|| (px-1==cx && py==cy) || (px+1==cx && py+1==cy)
+					|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy) ){
 				if(cible.getEstPersonage()){
-					
+					setaction(false);
 					for(int i =0 ; i <ile.getlistperso().size();i++){
 						if(this.getP().equals(ile.getlistperso().get(i).getP()) 
 								&& this.getEquipe()!= ile.getlistperso().get(i).getEquipe()){
 							ile.getlistperso().get(i).setEnergie(ile.getlistperso().get(i).getEnergie()-15);
-							this.setEnergie(this.getEnergie()-5);
+							if(ile.getlistperso().get(i).getEnergie()<=0){
+								ile.getlistperso().get(i).mort(ile);
+							}
+							this.setEnergie(this.getEnergie()-10);
+							if(this.getEnergie()<=0){
+								this.mort(ile);
+							}
 							break;
 						}
 					}
@@ -40,5 +48,8 @@ public class Guerrier extends Personage {
 	}
 
 
+	public String getnom(){
+		return "Guerrier";
+	}
 
 }

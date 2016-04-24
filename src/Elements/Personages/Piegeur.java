@@ -19,25 +19,29 @@ public class Piegeur extends Personage {
 			int py=this.getP().getY();
 			int cx=cible.getX();
 			int cy=cible.getY();
-			if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
+			if((px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
+					|| (px-1==cx && py==cy) || (px+1==cx && py+1==cy)
+					|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy) ){
 				if(!cible.getEstPersonage() && !cible.getEstElement() && !cible.getEstBateau()){
 					ile.getlistmine().add(new Mine(cible,this.getEquipe()));
 					this.setNbMine(this.getNbMine()-1);
 					this.setEnergie(this.getEnergie()-5);
+					if(this.getEnergie()<=0){
+						this.mort(ile);
+					}
 					cible.setEstMine(true);
 					
 				}
 				
 			}
 		}
-		
-		
+				
 	}
 
 
-	
-
-
+	public String getnom(){
+		return "Piegeur";
+	}
 
 
 }

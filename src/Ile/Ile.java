@@ -2,10 +2,16 @@ package Ile;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import Actions.Mine;
 import Elements.Bateau;
 import Elements.Element;
+import Elements.Personages.Explorateur;
+import Elements.Personages.Guerrier;
 import Elements.Personages.Personage;
+import Elements.Personages.Voleur;
+import Plateaux.SuperPlateauIterable;
 
 public class Ile {
 
@@ -15,6 +21,12 @@ public class Ile {
 	private Parcelle [][] carte;
 	private ArrayList<Bateau> listbateau;
 	private ArrayList<Mine> listmine;
+	private SuperPlateauIterable p1;
+	private int taille;
+	private int[][] jeu;
+	private String[] gifs={"img/Chemin.png","img/Rocher.png","img/Eau.png","img/Coffre.png",
+			"img/BateauBleu.png","img/ExplorateurBleu.png","img/VoleurBleu.png","img/GuerrierBleu.png","img/PiegeurBleu.png","img/TrouBleu.png",
+			"img/BateauRouge.png","img/ExplorateurRouge.png","img/VoleurRouge.png","img/GuerrierRouge.png","img/PiegeurRouge.png","img/TrouRouge.png"};
 	/**
 	 * constructeur sans paramètre qui construit une carte de 10 sur 10
 	 */
@@ -43,6 +55,9 @@ public class Ile {
 	 */
 	public void initialized(int po){
 		
+		taille=carte.length+2;
+		p1 = new SuperPlateauIterable(gifs, taille);
+		jeu=new int[taille][taille];
 
 		//initialize le tableau et creation des parcel;
 		for(int i = 0; i<this.getCarte().length;i++ ){
@@ -200,6 +215,66 @@ public class Ile {
 		return res;
 	}
 	
+	public void affichage(){
+		//affectation de la carte dans un tableau d'entiers
+		for (int i=0;i<taille;i++){
+			for (int j=0;j<taille;j++){
+				if(i>0 && j>0 && i<=carte.length && j<=carte.length){
+					
+					if(carte[i-1][j-1].getEstBateau() && 
+							listbateau.get(0).getP().equals(carte[i-1][j-1])){
+						jeu[i][j]=5;
+					}else if(carte[i-1][j-1].getEstBateau()){
+						jeu[i][j]=11;
+					}else if(carte[i-1][j-1].getEstPersonage()){
+						int l=0;
+						while (!listperso.get(l).getP().equals(carte[i-1][j-1])){
+							l++;
+						}
+						int k=5;
+						if(listperso.get(l).getEquipe()==2){
+							k+=6;
+						}
+						if(listperso.get(l) instanceof Explorateur){
+							k+=1;
+						}else if(listperso.get(l) instanceof Voleur){
+							k+=2;
+						}else if(listperso.get(l) instanceof Guerrier){
+							k+=3;
+						}else{
+							k+=4;
+						}
+						jeu[i][j]=k;
+					}else if(carte[i-1][j-1].getEstElement()){
+						jeu[i][j]=2;
+						if(listelement.get(0).getPe().equals(carte[i-1][j-1])){
+							jeu[i][j]=4;
+							
+						}
+					}else if (carte[i-1][j-1].getEstMine()){
+						int l=0;
+						while (!listmine.get(l).getPmine().equals(carte[i-1][j-1])){
+							l++;
+						}
+						if(listmine.get(l).getEquipe()==1){
+							jeu[i][j]=10;
+						}else{
+							jeu[i][j]=16;
+						}
+					}else{
+						jeu[i][j]=1;
+					}
+					
+				}else{
+					jeu[i][j]=3;
+				}
+			}
+		}
+		
+		p1.setJeu(jeu);
+		p1.affichage();
+	}
+	
 	// 
 	
 	/**
@@ -247,5 +322,15 @@ public class Ile {
 	
 	public void setlistmine (ArrayList<Mine> list){
 		listmine=list;
+	}
+	
+	public SuperPlateauIterable getPlateau(){
+		return p1;
+	}
+	
+	public void FinDeJeu(int equipe){
+		p1.close();
+		JOptionPane op=new JOptionPane();
+		op.showMessageDialog(op, "Fin Du Jeu, Equipe " + equipe+ " a gagné",null,JOptionPane.INFORMATION_MESSAGE);
 	}
 }

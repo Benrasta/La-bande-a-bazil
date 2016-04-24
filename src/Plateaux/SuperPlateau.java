@@ -19,7 +19,7 @@ public class SuperPlateau {
 	}
 	
 	void paintComponent(java.awt.Graphics g){
-		p1.paintComponent(g);
+		//p1.paintComponent(g); ???
 	}
 	
 	void setJeu(int[][] jeu){

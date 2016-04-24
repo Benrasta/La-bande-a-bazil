@@ -1,4 +1,6 @@
 package Elements.Personages;
+import javax.swing.JOptionPane;
+
 import Ile.Ile;
 import Ile.Parcelle;
 
@@ -10,12 +12,16 @@ public abstract class Personage {
 	private boolean aClef;
 	private boolean aTresor;
 	private int nbMine;
+	private boolean action;
+	private int tour;
+	private boolean vie;
+	private JOptionPane op;
 		
 	public Personage(int equipe,int energie,Parcelle p){
 		this.equipe=equipe;
 		this.energie=energie;
 		this.p=p;
-	
+		vie=true;	
 	}
 
 	public int getEquipe() {
@@ -108,7 +114,42 @@ public abstract class Personage {
 	public void setNbMine(int nbMine) {
 		this.nbMine = nbMine;
 	}
-		
 	
+	public boolean getaction(){
+		return action;
+	}
+	
+	public void setaction(boolean b){
+		action = b;
+	}
+	
+	public int gettour(){
+		return tour;
+	}
+	
+	public void settour(){
+		tour-=1;
+	}
+	
+	public void dansMine(){
+		tour=3;
+	}
+	
+	public void mort(Ile ile){
+		op=new JOptionPane();
+		op.showMessageDialog(op, getnom() +" de l'equipe" +equipe+" est mort",null,JOptionPane.INFORMATION_MESSAGE);
+		int i=0;
+		while(!ile.getlistperso().get(i).equals(this)){
+			i++;
+		}
+		ile.getlistperso().remove(i);
+		vie=false;
+	}
+	
+	public boolean getVie(){
+		return vie;
+	}
+		
+	public abstract String getnom();
 	
 }

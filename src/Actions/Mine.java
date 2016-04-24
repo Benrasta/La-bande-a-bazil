@@ -3,11 +3,13 @@ import Ile.Parcelle;
 
 public class Mine {
 	private Parcelle pmine;
+	private int tour;
 	private int equipe;
 	
 	public Mine(Parcelle pmine,int equipe){
 		this.pmine=pmine;
 		this.equipe=equipe;
+		tour=3;
 	}
 
 	public String toString(){
@@ -35,5 +37,11 @@ public class Mine {
 		this.pmine = pmine;
 	}
 	
+	public void setTour(){
+		tour-=1;
+	}
 	
+	public int getTour(){
+		return tour;
+	}
 }

@@ -96,7 +96,7 @@ public class Plateau {
 		window = new JFrame() ;
 		graphic = new GraphicPane(gif, taille) ;
 		console = null ;
-
+		window.setExtendedState(window.MAXIMIZED_BOTH);
 		// Caractéristiques initiales pour la fenetre.
 		window.setTitle("Plateau de jeu ("+taille+"X"+taille+")");
 		window.setLocationRelativeTo(null);
