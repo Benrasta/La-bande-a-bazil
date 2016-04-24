@@ -37,7 +37,11 @@ public abstract class Personage {
 	}
 
 	public void setEnergie(int energie) {
+		if (energie>100){
+			energie=100;
+		}
 		this.energie = energie;
+		System.out.println(this.getnom()+" : "+this.energie+" energie.");
 	}
 
 	public Parcelle getP() {

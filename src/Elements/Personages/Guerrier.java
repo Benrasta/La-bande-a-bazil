@@ -22,7 +22,7 @@ public class Guerrier extends Personage {
 			int cx=cible.getX();
 			int cy=cible.getY();
 			if((px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
-					|| (px-1==cx && py==cy) || (px+1==cx && py+1==cy)
+					|| (px-1==cx && py-1==cy) || (px+1==cx && py==cy)
 					|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy) ){
 				if(cible.getEstPersonage()){
 					setaction(false);
@@ -33,6 +33,7 @@ public class Guerrier extends Personage {
 							if(ile.getlistperso().get(i).getEnergie()<=0){
 								ile.getlistperso().get(i).mort(ile);
 							}
+							System.out.println("Vous avez attaquer :" + ile.getlistperso().get(i).getnom() );
 							this.setEnergie(this.getEnergie()-10);
 							if(this.getEnergie()<=0){
 								this.mort(ile);
@@ -40,9 +41,15 @@ public class Guerrier extends Personage {
 							break;
 						}
 					}
+				}else{
+					System.out.println("Vous ne pouvez pas agir en "+cx+"-"+cy);
 				}
 				
+			}else{
+				System.out.println("Vous ne pouvez pas agir en "+cx+"-"+cy);
 			}
+		}else{
+			System.out.println("Vous n'avez pas d'arme");
 		}
 		
 	}

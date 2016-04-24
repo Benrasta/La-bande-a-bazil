@@ -43,8 +43,12 @@ public class Explorateur extends Personage{
 				if(this.getEnergie()<=0){
 					this.mort(ile);
 				}
+			}else{
+				System.out.println("Vous ne pouvez pas agir en "+cx+"-"+cy);
 			}
 				
+		}else{
+			System.out.println("Vous ne pouvez pas agir en "+cx+"-"+cy);
 		}
 	}
 			
