@@ -37,8 +37,11 @@ public abstract class Personage {
 	}
 
 	public void setEnergie(int energie) {
-		if (energie>100){
-			energie=100;
+		if (energie>2){
+			energie=2;
+		}
+		if (energie<0){
+			energie=0;
 		}
 		this.energie = energie;
 		System.out.println(this.getnom()+" : "+this.energie+" energie.");
@@ -142,11 +145,7 @@ public abstract class Personage {
 	public void mort(Ile ile){
 		op=new JOptionPane();
 		op.showMessageDialog(op, getnom() +" de l'equipe" +equipe+" est mort",null,JOptionPane.INFORMATION_MESSAGE);
-		int i=0;
-		while(!ile.getlistperso().get(i).equals(this)){
-			i++;
-		}
-		ile.getlistperso().remove(i);
+		p.setEstPersonage(false);
 		vie=false;
 	}
 	

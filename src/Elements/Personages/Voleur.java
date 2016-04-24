@@ -51,7 +51,7 @@ public class Voleur extends Personage{
 							System.out.println("Cette personne ne possede rien que vous ne pouvez voler");
 						}
 						this.setEnergie(this.getEnergie()-10);
-						if(this.getEnergie()<=0){
+						if(this.getEnergie()==0){
 							this.mort(ile);
 						}
 					}

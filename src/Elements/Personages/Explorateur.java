@@ -40,7 +40,7 @@ public class Explorateur extends Personage{
 					System.out.println("Vous n'avez rien trouvez");
 				}
 				this.setEnergie(this.getEnergie()-5);
-				if(this.getEnergie()<=0){
+				if(this.getEnergie()==0){
 					this.mort(ile);
 				}
 			}else{

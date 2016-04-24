@@ -32,20 +32,14 @@ public class Deplacement extends Action {
 						|| (px-1==cx && py-1==cy) || (px+1==cx && py==cy)
 						|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy)){
 					p.setEnergie(p.getEnergie()-1);
-					if (p.getEnergie()<=0){
-						p.mort(ile);
-					}
-
 					// p prend pour parcelle la cible
 					ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 					p.setP(cible);
 					p.setaction(false);
-					ile.affichage();
 
 					if(cible.equals(ile.getlistbateau().get(p.getEquipe()-1))){
 						ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 						ile.getlistbateau().get(p.getEquipe()-1).lp.add(p);
-						//p.setEnergie(100);
 						if(p.isaTresor()){
 							ile.getlistbateau().get(p.getEquipe()-1).setTresor(true);
 							ile.FinDeJeu(p.getEquipe());
@@ -80,10 +74,6 @@ public class Deplacement extends Action {
 				//verifie si la cible et a porté de l'explorateur
 				if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
 					p.setEnergie(p.getEnergie()-1);
-					if(p.getEnergie()<=0){
-						p.mort(ile);
-					}
-
 					// p prend pour parcelle la cible
 					ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 					p.setP(cible);
@@ -91,7 +81,6 @@ public class Deplacement extends Action {
 					if(cible.equals(ile.getlistbateau().get(p.getEquipe()-1))){
 						//ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
 						ile.getlistbateau().get(p.getEquipe()-1).lp.add(p);
-						p.setEnergie(100);
 						if(p.isaTresor()){
 							ile.getlistbateau().get(p.getEquipe()-1).setTresor(true);
 							ile.FinDeJeu(p.getEquipe());
@@ -118,6 +107,9 @@ public class Deplacement extends Action {
 				System.out.println(p.toString() +" ne peux se déplacé en "+ cible.getX()+","+cible.getY() );
 			}
 
+		}
+		if (p.getEnergie()==0){
+			p.mort(ile);
 		}
 		ile.affichage();
 	}

@@ -27,7 +27,7 @@ public class Piegeur extends Personage {
 					this.setNbMine(this.getNbMine()-1);
 					this.setEnergie(this.getEnergie()-5);
 					System.out.println("Vous avez posez une mine en "+cx+"-"+cy);
-					if(this.getEnergie()<=0){
+					if(this.getEnergie()==0){
 						this.mort(ile);
 					}
 					cible.setEstMine(true);

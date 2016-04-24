@@ -146,7 +146,7 @@ public class Ile {
 					id--;
 					tmmp[i][j]=true;
 					carte[i][j].setEstElement(true);
-					System.out.println(i +" " + j);
+					//System.out.println(i +" " + j);
 				}
 			}
 		}
