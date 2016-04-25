@@ -23,6 +23,9 @@ class GraphicPane extends JPanel {
 	private ImageIcon[] images;
 	private int dimImage;
 	private int[][] jeu;
+	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Coffre.png",
+			"BateauBleu.png","ExplorateurBleu.png","VoleurBleu.png","GuerrierBleu.png","PiegeurBleu.png","TrouBleu.png",
+			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png"};
 	/**
 	 * Construit un plateau de jeu vide de dimension taille x taille.
 	 * Initialement, les cellules sont vides. Le constructeur demande la fourniture
@@ -41,7 +44,15 @@ class GraphicPane extends JPanel {
 		if (gif!=null){
 			nbImages=gif.length;
 			images=new ImageIcon[nbImages];	
-			for (int i=0;i<nbImages;i++) images[i]=new ImageIcon(gif[i]);
+			for (int i=0;i<nbImages;i++){
+				java.net.URL imageURL = Plateau.class.getResource(gifs[i]);
+				   if (imageURL != null) {
+				      images[i] = new ImageIcon(imageURL);
+				   } else { // Traitement  si image non trouvée
+				      System.err.println("Image : '" + gifs[i]+ "' non trouvée") ;
+				      images[i] = null ;
+				   }
+			}
 			dimImage=images[0].getIconHeight()+2;
 			setGraphicSize() ;
 			this.setBackground(Color.LIGHT_GRAY);

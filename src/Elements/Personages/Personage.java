@@ -37,8 +37,8 @@ public abstract class Personage {
 	}
 
 	public void setEnergie(int energie) {
-		if (energie>2){
-			energie=2;
+		if (energie>100){
+			energie=100;
 		}
 		if (energie<0){
 			energie=0;

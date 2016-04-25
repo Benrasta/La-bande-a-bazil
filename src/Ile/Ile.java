@@ -24,11 +24,11 @@ public class Ile {
 	private SuperPlateauIterable p1;
 	private int taille;
 	private int[][] jeu;
-	private String[] gifs={"img/Chemin.png","img/Rocher.png","img/Eau.png","img/Coffre.png",
-			"img/BateauBleu.png","img/ExplorateurBleu.png","img/VoleurBleu.png","img/GuerrierBleu.png","img/PiegeurBleu.png","img/TrouBleu.png",
-			"img/BateauRouge.png","img/ExplorateurRouge.png","img/VoleurRouge.png","img/GuerrierRouge.png","img/PiegeurRouge.png","img/TrouRouge.png"};
+	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Coffre.png",
+			"BateauBleu.png","ExplorateurBleu.png","VoleurBleu.png","GuerrierBleu.png","PiegeurBleu.png","TrouBleu.png",
+			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png"};
 	/**
-	 * constructeur sans paramètre qui construit une carte de 10 sur 10
+	 * constructeur sans paramï¿½tre qui construit une carte de 10 sur 10
 	 */
 	public Ile(){
 		this.setCarte(new Parcelle[10][10]);
@@ -51,7 +51,7 @@ public class Ile {
 	}
 	
 	/**
-	 * initialisation de l'Ile avec placement des eléments et des bateaux
+	 * initialisation de l'Ile avec placement des elï¿½ments et des bateaux
 	 */
 	public void initialized(int po){
 		
@@ -67,11 +67,11 @@ public class Ile {
 		}
 
 
-		// fait un tableau de boolean de la même taille que l'ile 
+		// fait un tableau de boolean de la mï¿½me taille que l'ile 
 
 		boolean [][] tmmp = new boolean[this.getCarte().length][this.getCarte()[1].length];
 
-		// désigne le nombre de rocher qu'il y aura
+		// dï¿½signe le nombre de rocher qu'il y aura
 
 		
 		int nbob =(int) ((this.getCarte().length * this.getCarte()[1].length)* po/100);
@@ -82,7 +82,7 @@ public class Ile {
 		int equi=2;
 
 		while(equi >= 1){
-			//coordoné aleatoire d'une parcelle pour un bateau sur le contour
+			//coordonï¿½ aleatoire d'une parcelle pour un bateau sur le contour
 			
 			// je comprend pas comment ca marche...
 				
@@ -100,11 +100,11 @@ public class Ile {
 			this.listbateau.add(new Bateau(equi,new Parcelle(j,k)));			
 			carte[j][k].setEstBateau(true);	// met la parcelle en estBateau 
 			tmmp[j][k] = true;		// il y a un bateau sur la parcelle
-			equi --;			// passe à la deuxieme equipe
+			equi --;			// passe ï¿½ la deuxieme equipe
 			}
 		}
 		
-		//crétion du chemin
+		//crï¿½tion du chemin
 		Parcelle p = new Parcelle(this.listbateau.get(0).getP().getX(),this.listbateau.get(0).getP().getY());
 		int largeur =this.listbateau.get(1).getP().getX();
 		int hauteur = this.listbateau.get(1).getP().getY();
@@ -151,7 +151,7 @@ public class Ile {
 			}
 		}
 		//System.out.println(this.listelement.get(0).getPe().getX()+" "+this.listelement.get(0).getPe().getY());
-		//genere les Rochers élatoirement 
+		//genere les Rochers ï¿½latoirement 
 		while(nbob >0){
 			int l = new Random().nextInt(this.getCarte().length);
 			int m = new Random().nextInt(this.getCarte()[1].length);
@@ -285,7 +285,7 @@ public class Ile {
 		return carte;
 	}
 	/**
-	 ecrase la carte courante par celle donner en paramètre
+	 ecrase la carte courante par celle donner en paramï¿½tre
 	 * @param carte
 	 */
 	public void setCarte(Parcelle [][] carte) {
@@ -331,6 +331,6 @@ public class Ile {
 	public void FinDeJeu(int equipe){
 		p1.close();
 		JOptionPane op=new JOptionPane();
-		op.showMessageDialog(op, "Fin Du Jeu, Equipe " + equipe+ " a gagné",null,JOptionPane.INFORMATION_MESSAGE);
+		op.showMessageDialog(op, "Fin Du Jeu, Equipe " + equipe+ " a gagnï¿½",null,JOptionPane.INFORMATION_MESSAGE);
 	}
 }
