@@ -13,8 +13,6 @@ import Menu.Equipe;
 public class Jeu {
 	private Ile ile;
 	private int equipe=0;
-	private Equipe equi1;
-	private Equipe equi2;
 	private Jeu j;
 	private int cpt;
 	private JOptionPane op;
@@ -65,7 +63,7 @@ public class Jeu {
 			if(x >=0 && y>=0 && x <ile.getCarte().length && y < ile.getCarte().length ){
 				p.Agit(ile.getCarte()[x][y],ile);
 			}
-			ile.affichage();
+			ile.affichage(equipe+1);
 		}else{
 			op=new JOptionPane();
 			op.showMessageDialog(op, "Vous ne pouvez plus agir avec ce personnage","erreur",JOptionPane.WARNING_MESSAGE);
@@ -106,7 +104,7 @@ public class Jeu {
 		if(!vie){
 			ile.FinDeJeu(equipe+1);
 		}else{
-			ile.affichage();
+			ile.affichage(equipe+1);
 			new Equipe(equipe+1, this, ile).affichage();
 			equipe=1-equipe;
 		}

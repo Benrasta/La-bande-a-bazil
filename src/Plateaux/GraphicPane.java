@@ -23,7 +23,7 @@ class GraphicPane extends JPanel {
 	private ImageIcon[] images;
 	private int dimImage;
 	private int[][] jeu;
-	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Coffre.png",
+	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Brouillard.png","Coffre.png",
 			"BateauBleu.png","ExplorateurBleu.png","VoleurBleu.png","GuerrierBleu.png","PiegeurBleu.png","TrouBleu.png",
 			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png"};
 	/**

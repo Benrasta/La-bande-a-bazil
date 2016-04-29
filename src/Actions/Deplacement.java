@@ -111,7 +111,7 @@ public class Deplacement extends Action {
 		if (p.getEnergie()==0){
 			p.mort(ile);
 		}
-		ile.affichage();
+		ile.affichage(p.getEquipe());
 	}
 
 }

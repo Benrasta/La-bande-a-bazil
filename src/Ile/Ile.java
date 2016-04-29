@@ -24,7 +24,7 @@ public class Ile {
 	private SuperPlateauIterable p1;
 	private int taille;
 	private int[][] jeu;
-	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Coffre.png",
+	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Brouillard","Coffre.png",
 			"BateauBleu.png","ExplorateurBleu.png","VoleurBleu.png","GuerrierBleu.png","PiegeurBleu.png","TrouBleu.png",
 			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png"};
 	/**
@@ -49,12 +49,12 @@ public class Ile {
 		this.listbateau=new ArrayList<>();
 		this.listmine=new ArrayList<>();
 	}
-	
+
 	/**
 	 * initialisation de l'Ile avec placement des el�ments et des bateaux
 	 */
 	public void initialized(int po){
-		
+
 		taille=carte.length+2;
 		p1 = new SuperPlateauIterable(gifs, taille);
 		jeu=new int[taille][taille];
@@ -73,19 +73,19 @@ public class Ile {
 
 		// d�signe le nombre de rocher qu'il y aura
 
-		
+
 		int nbob =(int) ((this.getCarte().length * this.getCarte()[1].length)* po/100);
 
-		
+
 		//nombre d'equipe
 
 		int equi=2;
 
 		while(equi >= 1){
 			//coordon� aleatoire d'une parcelle pour un bateau sur le contour
-			
+
 			// je comprend pas comment ca marche...
-				
+
 			int j=0;
 			int k =1;
 			if(equi ==2){
@@ -97,13 +97,13 @@ public class Ile {
 
 			// s'il n'y a pas deja un element sur la parcelle
 			if(tmmp[j][k] != true){
-			this.listbateau.add(new Bateau(equi,new Parcelle(j,k)));			
-			carte[j][k].setEstBateau(true);	// met la parcelle en estBateau 
-			tmmp[j][k] = true;		// il y a un bateau sur la parcelle
-			equi --;			// passe � la deuxieme equipe
+				this.listbateau.add(new Bateau(equi,new Parcelle(j,k)));			
+				carte[j][k].setEstBateau(true);	// met la parcelle en estBateau 
+				tmmp[j][k] = true;		// il y a un bateau sur la parcelle
+				equi --;			// passe � la deuxieme equipe
 			}
 		}
-		
+
 		//cr�tion du chemin
 		Parcelle p = new Parcelle(this.listbateau.get(0).getP().getX(),this.listbateau.get(0).getP().getY());
 		int largeur =this.listbateau.get(1).getP().getX();
@@ -134,7 +134,7 @@ public class Ile {
 			}
 			tmmp[p.getX()][p.getY()] = true;
 		}
-		
+
 		//generation de la clef et du coffre a coter du chemin
 		int id =3;
 		while(id>0){
@@ -160,16 +160,16 @@ public class Ile {
 				carte[l][m].setEstElement(true); 	// met le boolean de parcelle en element
 				tmmp[l][m]= true;		// la parcelle est prise
 				nbob =nbob -1;			// nombre de rocher -1
-				}
-				
 			}
-		
-			
+
 		}
-		
-	
-	
-	
+
+
+	}
+
+
+
+
 	// mode texte
 	/**
 	 * retourne la carte en mode texte;
@@ -179,7 +179,7 @@ public class Ile {
 		for(int i = 0; i<this.getCarte().length;i++ ){
 			res =res + "|";
 			for(int j = 0; j < this.getCarte()[1].length;j++ ){
-				
+
 				if(carte[i][j].getEstBateau()){
 					for(int x= 0 ;x <this.listbateau.size(); x++){
 						if(carte[i][j].equals(this.listbateau.get(x).getP())){
@@ -193,7 +193,7 @@ public class Ile {
 								res= res + this.listperso.get(x).toString();
 							}
 						}
-						
+
 					} else{
 						if(carte[i][j].getEstMine()){
 							for(int x = 0; x < this.listmine.size();x++){
@@ -205,78 +205,92 @@ public class Ile {
 							res = res + carte[i][j].toString()+  "|";
 						}
 					}
-					
-					
-					
+
+
+
 				}
 			}
 			res =res+"\n" +"+-+-+-+-+-+-+-+-+-+-+"+"\n";
 		}
 		return res;
 	}
-	
-	public void affichage(){
+
+	public void affichage(int equipe){
 		//affectation de la carte dans un tableau d'entiers
 		for (int i=0;i<taille;i++){
 			for (int j=0;j<taille;j++){
-				if(i>0 && j>0 && i<=carte.length && j<=carte.length){
-					
-					if(carte[i-1][j-1].getEstBateau() && 
-							listbateau.get(0).getP().equals(carte[i-1][j-1])){
-						jeu[i][j]=5;
-					}else if(carte[i-1][j-1].getEstBateau()){
-						jeu[i][j]=11;
-					}else if(carte[i-1][j-1].getEstPersonage()){
-						int l=0;
-						while (!listperso.get(l).getP().equals(carte[i-1][j-1])){
-							l++;
-						}
-						int k=5;
-						if(listperso.get(l).getEquipe()==2){
-							k+=6;
-						}
-						if(listperso.get(l) instanceof Explorateur){
-							k+=1;
-						}else if(listperso.get(l) instanceof Voleur){
-							k+=2;
-						}else if(listperso.get(l) instanceof Guerrier){
-							k+=3;
+				jeu[i][j]=4;
+			}
+		}
+
+		for(Personage perso: listperso){
+			if(perso.getEquipe()==equipe){
+				for(int i=-1; i<=1; i++){
+					for(int j=-1; j<=1; j++){
+						if(perso.getP().getX()+i+1>0 && perso.getP().getY()+j+1>0 && perso.getP().getX()+i+1<=carte.length && perso.getP().getY()+j+1<=carte.length){
+
+							if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstBateau() && 
+									listbateau.get(0).getP().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=6;
+							}else if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstBateau()){
+								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=12;
+							}else if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstPersonage()){
+								int l=0;
+								while (!listperso.get(l).getP().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+									l++;
+								}
+								int k=6;
+								if(listperso.get(l).getEquipe()==2){
+									k+=6;
+								}
+								if(listperso.get(l) instanceof Explorateur){
+									k+=1;
+								}else if(listperso.get(l) instanceof Voleur){
+									k+=2;
+								}else if(listperso.get(l) instanceof Guerrier){
+									k+=3;
+								}else{
+									k+=4;
+								}
+								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=k;
+							}else if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstElement()){
+								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=2;
+								if(listelement.get(0).getPe().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+									jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=5;
+
+								}
+							}else if (carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstMine()){
+								int l=0;
+								while (!listmine.get(l).getPmine().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+									l++;
+								}
+								if (listmine.get(l).getEquipe()==equipe){
+									if(listmine.get(l).getEquipe()==1){
+										jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=11;
+									}else{
+										jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=17;
+									}
+								}else{
+									jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=3;
+								}
+							}else{
+								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=1;
+							}
+
 						}else{
-							k+=4;
+							jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=3;
 						}
-						jeu[i][j]=k;
-					}else if(carte[i-1][j-1].getEstElement()){
-						jeu[i][j]=2;
-						if(listelement.get(0).getPe().equals(carte[i-1][j-1])){
-							jeu[i][j]=4;
-							
-						}
-					}else if (carte[i-1][j-1].getEstMine()){
-						int l=0;
-						while (!listmine.get(l).getPmine().equals(carte[i-1][j-1])){
-							l++;
-						}
-						if(listmine.get(l).getEquipe()==1){
-							jeu[i][j]=10;
-						}else{
-							jeu[i][j]=16;
-						}
-					}else{
-						jeu[i][j]=1;
 					}
-					
-				}else{
-					jeu[i][j]=3;
 				}
 			}
 		}
-		
+
 		p1.setJeu(jeu);
 		p1.affichage();
 	}
-	
+
 	// 
-	
+
 	/**
 	 * revoie la carte courante
 	 * @return
@@ -291,43 +305,43 @@ public class Ile {
 	public void setCarte(Parcelle [][] carte) {
 		this.carte = carte;
 	}
-	
+
 	public ArrayList<Personage> getlistperso(){
 		return listperso;
 	}
-	
+
 	public void setlistperso (ArrayList<Personage> list){
 		listperso=list;
 	}
-	
+
 	public ArrayList<Element> getlistelement(){
 		return listelement;
 	}
-	
+
 	public void setlistelement (ArrayList<Element> list){
 		listelement=list;
 	}
-	
+
 	public ArrayList<Bateau> getlistbateau(){
 		return listbateau;
 	}
-	
+
 	public void setlistbateau (ArrayList<Bateau> list){
 		listbateau=list;
 	}
-	
+
 	public ArrayList<Mine> getlistmine(){
 		return listmine;
 	}
-	
+
 	public void setlistmine (ArrayList<Mine> list){
 		listmine=list;
 	}
-	
+
 	public SuperPlateauIterable getPlateau(){
 		return p1;
 	}
-	
+
 	public void FinDeJeu(int equipe){
 		p1.close();
 		JOptionPane op=new JOptionPane();
