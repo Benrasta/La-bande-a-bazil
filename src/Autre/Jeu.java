@@ -1,5 +1,6 @@
 package Autre;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -13,10 +14,11 @@ import Menu.Equipe;
 public class Jeu {
 	private Ile ile;
 	private int equipe=0;
-	private Jeu j;
 	private int cpt;
 	private JOptionPane op;
 	private boolean vie;
+	private ArrayList<Boolean> equi;
+	private ArrayList<IA> ia;
 
 	public void CreaIle(int dim, int obs){
 		//initialisation de la laplaya	
@@ -24,22 +26,46 @@ public class Jeu {
 		ile.initialized(obs);			
 	}
 
-	public void LancementHVH(int dim, int obs){
+	public void LancementHVH(int dim, int obs ){
 		//perso de chaque equipe
 		CreaIle(dim, obs);
-		j=new Jeu();
-		new CreaEquipe(1,ile ,j);
-		new CreaEquipe(2,ile, j);
+		equi=new ArrayList<Boolean>();
+		new CreaEquipe(1,this);
+		equi.add(true);
+		new CreaEquipe(2, this);
+		equi.add(true);
+	}
+	
+	public void LancementHVI(int dim, int obs, int nbp){
+		//perso de chaque equipe
+		CreaIle(dim, obs);
+		equi=new ArrayList<Boolean>();
+		ia=new ArrayList<IA>();
+		ia.add(new IA(1, nbp,this));
+		equi.add(false);
+		new CreaEquipe(2,this);
+		equi.add(true);
+	}
+	
+	public void LancementIVI(int dim, int obs, int nbp){
+		//perso de chaque equipe
+		CreaIle(dim, obs);
+		equi=new ArrayList<Boolean>();
+		ia=new ArrayList<IA>();
+		ia.add(new IA( 1, nbp,this));
+		equi.add(false);
+		ia.add(new IA( 2, nbp,this));
+		equi.add(false);
 	}
 
-	public void Debut (int deb, Ile ile){
+	public void Debut (int deb){
 		cpt+=deb;
 		if(cpt==3){
-			tour(ile);
+			tour();
 		}
 	}
 
-	public void Deplacement(Personage p, Ile ile){
+	public void Deplacement(Personage p){
 		if (p.getaction()){
 			System.out.println("x:");
 			int x=saisie();
@@ -54,7 +80,7 @@ public class Jeu {
 		}
 	}
 
-	public void Action(Personage p, Ile ile){
+	public void Action(Personage p){
 		if (p.getaction()){
 			System.out.println("x:");
 			int x=saisie();
@@ -70,13 +96,13 @@ public class Jeu {
 		}
 	}
 
-	public void FinDeTour(Ile ile){
+	public void FinDeTour(){
 		op=new JOptionPane();
 		op.showMessageDialog(op, "Au Tour du prochain joueur",null,JOptionPane.INFORMATION_MESSAGE);
-		tour(ile);
+		tour();
 	}
 
-	public void tour(Ile ile){
+	public void tour(){
 		vie=false;
 		for (int i=0; i<ile.getlistperso().size(); i++){
 			if (ile.getlistperso().get(i).getEquipe()==equipe+1){
@@ -105,7 +131,10 @@ public class Jeu {
 			ile.FinDeJeu(equipe+1);
 		}else{
 			ile.affichage(equipe+1);
-			new Equipe(equipe+1, this, ile).affichage();
+			new Equipe(equipe+1, this).affichage();
+			if(!equi.get(equipe)){
+				ia.get(equipe).tour();
+			}
 			equipe=1-equipe;
 		}
 		if (equipe==1){
@@ -115,6 +144,10 @@ public class Jeu {
 				}
 			}
 		}
+	}
+	
+	public Ile getIle(){
+		return ile;
 	}
 
 	public static int saisie(){

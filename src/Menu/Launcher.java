@@ -1,5 +1,6 @@
 package Menu;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,16 +11,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Autre.Jeu;
 
 public class Launcher extends JPanel {
 
 	private JFrame f;
-	private JSpinner dimension;
-	private JSpinner obstacles;
+	private JSlider  dimension;
+	private JSlider  obstacles;
+	private JSlider  nbperso;
+	private JLabel dim;
+	private JLabel obs;
+	private JLabel nbp;
 
 	public Launcher(){	
 		f = new JFrame("Launcher");
@@ -48,7 +54,23 @@ public class Launcher extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				f.setVisible(false);
-				new Jeu().LancementHVH((int)(dimension.getValue()),(int)(obstacles.getValue()));
+				new Jeu().LancementHVH(dimension.getValue(), obstacles.getValue());
+			}
+		});
+		bu2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.setVisible(false);
+				new Jeu().LancementHVI(dimension.getValue(), obstacles.getValue(), nbperso.getValue());
+			}
+		});
+		bu3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.setVisible(false);
+				new Jeu().LancementIVI(dimension.getValue(), obstacles.getValue(), nbperso.getValue());
 			}
 		});
 		Box bx1=Box.createHorizontalBox();
@@ -64,23 +86,44 @@ public class Launcher extends JPanel {
 
 	public void FirstPanel(){
 		JPanel fp=new JPanel();
-		fp.setLayout(new BoxLayout(fp, BoxLayout.X_AXIS));
-		JPanel p1 =new JPanel();
-		JPanel p2 =new JPanel();
-		p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
-		p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
-		SpinnerNumberModel model1 = new SpinnerNumberModel(10, 7, 50, 1); 
-		SpinnerNumberModel model2 = new SpinnerNumberModel(30, 10, 50, 5); 
-		dimension= new JSpinner(model1);
-		obstacles= new JSpinner(model2);
-		dimension.setPreferredSize(new Dimension (100,20));
-		obstacles.setPreferredSize(new Dimension (100,20));
-		p1.add(new JLabel("Taille du plateau:"));
-		p1.add(dimension);
-		p2.add(new JLabel("Pourcentage de rocher:"));
-		p2.add(obstacles);
-		fp.add(p1);
-		fp.add(p2);
+		fp.setLayout(new GridLayout(3,3));
+		fp.add(new JLabel("Taille du plateau:"));
+		dimension= new JSlider(7, 20, 10);
+		dim=new JLabel(": "+dimension.getValue());
+		dimension.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				dim.setText(": "+dimension.getValue());
+			}
+		});
+		fp.add(dimension);
+		fp.add(dim);
+		obstacles= new JSlider(10, 50, 30);
+		obs=new JLabel(": "+obstacles.getValue());
+		fp.add(new JLabel("Pourcentage de rocher:"));
+		obstacles.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				obs.setText(": "+obstacles.getValue());
+			}
+		});
+		fp.add(obstacles);
+		fp.add(obs);
+		nbperso=new JSlider(1, 20, 4);
+		nbp=new JLabel(": "+nbperso.getValue());
+		fp.add(new JLabel("Nombre de personnage de l'IA:"));
+		nbperso.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				nbp.setText(": "+nbperso.getValue());
+			}
+		});
+		fp.add(nbperso);
+		fp.add(nbp);
+
 		this.add(fp);
 	}
 }

@@ -16,17 +16,15 @@ import javax.swing.JPanel;
 import Autre.Jeu;
 import Elements.Personages.Guerrier;
 import Elements.Personages.Piegeur;
-import Ile.Ile;
 
 public class Equipe extends JPanel{
 	
 	private JFrame f;
-	private Ile ile;
 	private int e;
 	private Jeu jeu;
+	private int cpt;
 	
-	public Equipe(int e, Jeu jeu ,Ile ile){
-		this.ile=ile;
+	public Equipe(int e, Jeu jeu){
 		this.e=e;
 		this.jeu=jeu;
 		f = new JFrame("Equipe "+ (e));
@@ -50,29 +48,29 @@ public class Equipe extends JPanel{
 		int j=0;
 		int k=0;
 		boolean equipement;
-		for (int i=0; i<(ile.getlistperso().size()); i++){
-			if(ile.getlistperso().get(i).getEquipe()==e){
+		for (int i=0; i<(jeu.getIle().getlistperso().size()); i++){
+			if(jeu.getIle().getlistperso().get(i).getEquipe()==e){
 				pan.add(new JPanel());
 				pan.get(j).setLayout(new GridLayout(1, 9));
-				pan.get(j).add(new JLabel(ile.getlistperso().get(i).getnom()));
-				if(ile.getlistperso().get(i).getVie()){
-					pan.get(j).add(new JLabel("Energie= "+ile.getlistperso().get(i).getEnergie()));
+				pan.get(j).add(new JLabel(jeu.getIle().getlistperso().get(i).getnom()));
+				if(jeu.getIle().getlistperso().get(i).getVie()){
+					pan.get(j).add(new JLabel("Energie= "+jeu.getIle().getlistperso().get(i).getEnergie()));
 					pan.get(j).add(new JLabel("Inventaire: "));
 					equipement=false;
-					if(ile.getlistperso().get(i).isaClef()){
+					if(jeu.getIle().getlistperso().get(i).isaClef()){
 						pan.get(j).add(new JLabel("Clef"));
 						equipement=true;
 					}
-					if(ile.getlistperso().get(i).isaTresor()){
+					if(jeu.getIle().getlistperso().get(i).isaTresor()){
 						pan.get(j).add(new JLabel("Tresor"));
 						equipement=true;
 					}
-					if(ile.getlistperso().get(i) instanceof Guerrier && ile.getlistperso().get(i).isaArme()){
+					if(jeu.getIle().getlistperso().get(i) instanceof Guerrier && jeu.getIle().getlistperso().get(i).isaArme()){
 						pan.get(j).add(new JLabel("Epee"));
 						equipement=true;
 					}
-					if(ile.getlistperso().get(i) instanceof Piegeur && ile.getlistperso().get(i).getNbMine()>0){
-						pan.get(j).add(new JLabel("Mine: "+ ile.getlistperso().get(i).getNbMine()));
+					if(jeu.getIle().getlistperso().get(i) instanceof Piegeur && jeu.getIle().getlistperso().get(i).getNbMine()>0){
+						pan.get(j).add(new JLabel("Mine: "+ jeu.getIle().getlistperso().get(i).getNbMine()));
 						equipement=true;
 					}
 					if (!equipement){
@@ -98,28 +96,30 @@ public class Equipe extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				f.setVisible(false);
-				jeu.FinDeTour(ile);
+				jeu.FinDeTour();
 			}
 		});
 		this.add(fdt);
 	}
 	
 	public void ActionListenerAction(JButton j, int i ){
+		cpt=i;
 		j.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jeu.Action(ile.getlistperso().get(i), ile);
+				jeu.Action(jeu.getIle().getlistperso().get(cpt));
 			}
 		});
 	}
 	
 	public void ActionListenerDeplacement(JButton j, int i){
+		cpt=i;
 		j.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jeu.Deplacement(ile.getlistperso().get(i), ile);
+				jeu.Deplacement(jeu.getIle().getlistperso().get(cpt));
 			}
 		});
 	}
