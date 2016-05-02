@@ -35,11 +35,7 @@ public class CreaEquipe {
 		jeu=j;
 		f = new JFrame("Création d'équipe " + equipe);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		if (equipe ==1){
-			f.setLocation((dim.width-f.getSize().width)/8, (dim.height-f.getSize().height)/8);
-		}else{
-			f.setLocation((int)((dim.width-f.getSize().width)/1.5), (dim.height-f.getSize().height)/8);
-		}
+		f.setLocation((int)((dim.width-f.getSize().width)/2.5), (dim.height-f.getSize().height)/3);
 		JPanel p=new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 		PersoPanel(p);
@@ -50,7 +46,11 @@ public class CreaEquipe {
 			public void actionPerformed(ActionEvent e) {
 				f.setVisible(false);
 				Creationequipe(eq);
-				jeu.Debut(eq);
+				if (eq==1){
+					new CreaEquipe(2, jeu);
+				}else{
+					jeu.tour();
+				}
 			}
 		});
 		p.add(new JPanel().add(ok));

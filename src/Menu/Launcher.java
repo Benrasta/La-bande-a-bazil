@@ -16,6 +16,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Autre.Jeu;
+import Autre.Test;
 
 public class Launcher extends JPanel {
 
@@ -44,11 +45,7 @@ public class Launcher extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		FirstPanel();
 		JButton bu1=new JButton("Humain VS Humain");
-		JButton bu2=new JButton("Humain VS IA");
-		JButton bu3=new JButton("IA VS IA");
 		bu1.setPreferredSize(new Dimension(50,50));
-		bu2.setPreferredSize(new Dimension(50,50));
-		bu3.setPreferredSize(new Dimension(50,50));
 		bu1.addActionListener(new ActionListener() {
 
 			@Override
@@ -57,6 +54,11 @@ public class Launcher extends JPanel {
 				new Jeu().LancementHVH(dimension.getValue(), obstacles.getValue());
 			}
 		});
+		Box bx1=Box.createHorizontalBox();
+		bx1.add(bu1);
+		this.add(bx1);
+		JButton bu2=new JButton("Humain VS IA");
+		bu2.setPreferredSize(new Dimension(50,50));
 		bu2.addActionListener(new ActionListener() {
 
 			@Override
@@ -65,6 +67,11 @@ public class Launcher extends JPanel {
 				new Jeu().LancementHVI(dimension.getValue(), obstacles.getValue(), nbperso.getValue());
 			}
 		});
+		Box bx2=Box.createHorizontalBox();
+		bx2.add(bu2);
+		this.add(bx2);
+		JButton bu3=new JButton("IA VS IA");
+		bu3.setPreferredSize(new Dimension(50,50));
 		bu3.addActionListener(new ActionListener() {
 
 			@Override
@@ -73,15 +80,22 @@ public class Launcher extends JPanel {
 				new Jeu().LancementIVI(dimension.getValue(), obstacles.getValue(), nbperso.getValue());
 			}
 		});
-		Box bx1=Box.createHorizontalBox();
-		bx1.add(bu1);
-		this.add(bx1);
-		Box bx2=Box.createHorizontalBox();
-		bx2.add(bu2);
-		this.add(bx2);
 		Box bx3=Box.createHorizontalBox();
 		bx3.add(bu3);
 		this.add(bx3);
+		JButton bu4=new JButton("Test");
+		bu4.setPreferredSize(new Dimension(50,50));
+		bu4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.setVisible(false);
+				new Test();
+			}
+		});
+		Box bx4=Box.createHorizontalBox();
+		bx4.add(bu4);
+		this.add(bx4);
 	}
 
 	public void FirstPanel(){

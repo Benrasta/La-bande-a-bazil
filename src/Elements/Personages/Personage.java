@@ -23,6 +23,8 @@ public abstract class Personage {
 		this.p=p;
 		vie=true;	
 	}
+	
+	// TODO échange
 
 	public int getEquipe() {
 		return equipe;

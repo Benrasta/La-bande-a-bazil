@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import Actions.Mine;
+import Autre.Jeu;
 import Elements.Bateau;
 import Elements.Element;
 import Elements.Personages.Explorateur;
@@ -141,7 +142,7 @@ public class Ile {
 			int i= new Random().nextInt(this.getCarte().length);
 			int j= new Random().nextInt(this.getCarte().length);
 			if( i!=0 && j!=0 && i!=this.getCarte().length-1 && j!=this.getCarte().length-1 && tmmp[i][j]!=true){
-				if(tmmp[i+1][j] || tmmp[i][j+1] || tmmp[i-1][j] || tmmp[i][j-1]){
+				if(tmmp[i][j] || tmmp[i][j+1] || tmmp[i-1][j] || tmmp[i][j-1]){
 					this.listelement.add(new Element(id,new Parcelle(i,j)));
 					id--;
 					tmmp[i][j]=true;
@@ -215,14 +216,16 @@ public class Ile {
 		return res;
 	}
 
-	public void affichage(int equipe){
-		//affectation de la carte dans un tableau d'entiers
+	public void affichagebrouillard(){
 		for (int i=0;i<taille;i++){
 			for (int j=0;j<taille;j++){
 				jeu[i][j]=4;
 			}
 		}
+	}
 
+	public void affichagehumain(int equipe){
+		affichagebrouillard();
 		for(Personage perso: listperso){
 			if(perso.getEquipe()==equipe){
 				for(int i=-1; i<=1; i++){
@@ -284,6 +287,73 @@ public class Ile {
 				}
 			}
 		}
+
+	}
+
+	public void affichageIA(){
+		for(int i=0; i<jeu.length; i++){
+			for(int j=0; j<jeu.length; j++){
+				if(i>0 && j>0 && i<=carte.length && j<=carte.length){
+
+					if(carte[i-1][j-1].getEstBateau() && 
+							listbateau.get(0).getP().equals(carte[i-1][j-1])){
+						jeu[i][j]=6;
+					}else if(carte[i-1][j-1].getEstBateau()){
+						jeu[i][j]=12;
+					}else if(carte[i-1][j-1].getEstPersonage()){
+						int l=0;
+						while (!listperso.get(l).getP().equals(carte[i-1][j-1])){
+							l++;
+						}
+						int k=6;
+						if(listperso.get(l).getEquipe()==2){
+							k+=6;
+						}
+						if(listperso.get(l) instanceof Explorateur){
+							k+=1;
+						}else if(listperso.get(l) instanceof Voleur){
+							k+=2;
+						}else if(listperso.get(l) instanceof Guerrier){
+							k+=3;
+						}else{
+							k+=4;
+						}
+						jeu[i][j]=k;
+					}else if(carte[i-1][j-1].getEstElement()){
+						jeu[i][j]=2;
+						if(listelement.get(0).getPe().equals(carte[i-1][j-1])){
+							jeu[i][j]=5;
+
+						}
+					}else if (carte[i-1][j-1].getEstMine()){
+						int l=0;
+						while (!listmine.get(l).getPmine().equals(carte[i-1][j-1])){
+							l++;
+						}
+						if(listmine.get(l).getEquipe()==1){
+							jeu[i][j]=11;
+						}else{
+							jeu[i][j]=17;
+						}
+					}else{
+						jeu[i][j]=1;
+					}
+
+				}else{
+					jeu[i][j]=3;
+				}
+			}
+		}
+	}
+
+	public void affichage(int equipe, Jeu j){
+		//affectation de la carte dans un tableau d'entiers
+		if(j.getHumain()){
+			affichagehumain(equipe);
+		}else{
+			affichageIA();
+		}
+
 
 		p1.setJeu(jeu);
 		p1.affichage();

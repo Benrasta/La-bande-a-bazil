@@ -1,4 +1,5 @@
 package Actions;
+import Autre.Jeu;
 import Elements.Personages.Explorateur;
 import Elements.Personages.Guerrier;
 import Elements.Personages.Personage;
@@ -15,9 +16,9 @@ public class Deplacement extends Action {
 	private int cx;
 	private int cy;
 
-	public Deplacement(Personage p, Parcelle cible,Ile ile){
+	public Deplacement(Personage p, Parcelle cible,Jeu jeu){
 		super(p,cible);
-		this.ile=ile;
+		ile=jeu.getIle();
 
 
 		px=p.getP().getX();
@@ -111,7 +112,7 @@ public class Deplacement extends Action {
 		if (p.getEnergie()==0){
 			p.mort(ile);
 		}
-		ile.affichage(p.getEquipe());
+		ile.affichage(p.getEquipe(), jeu);
 	}
 
 }

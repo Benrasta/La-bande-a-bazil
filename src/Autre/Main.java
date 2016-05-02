@@ -82,7 +82,7 @@ public class Main {
 				int y=saisie();
 				
 				if(x >=0 && y>=0 && x <laplaya.getCarte().length && y < laplaya.getCarte().length ){
-					Action tmp = new Deplacement(laplaya.getlistperso().get(choixPerso),laplaya.getCarte()[x][y],laplaya);
+					Action tmp = new Deplacement(laplaya.getlistperso().get(choixPerso),laplaya.getCarte()[x][y],new Jeu(laplaya));
 					}
 			}
 				 if(choix ==2){
