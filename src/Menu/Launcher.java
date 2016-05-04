@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -96,6 +98,39 @@ public class Launcher extends JPanel {
 		Box bx4=Box.createHorizontalBox();
 		bx4.add(bu4);
 		this.add(bx4);
+		JButton bu5=new JButton("Regle");
+		bu5.setPreferredSize(new Dimension(50,50));
+		bu5.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Regle();
+			}
+		});
+		Box bx5=Box.createHorizontalBox();
+		bx5.add(bu5);
+		this.add(bx5);
+		
 	}
 
 	public void FirstPanel(){
