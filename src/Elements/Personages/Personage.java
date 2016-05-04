@@ -1,6 +1,7 @@
 package Elements.Personages;
 import javax.swing.JOptionPane;
 
+import Autre.Jeu;
 import Ile.Ile;
 import Ile.Parcelle;
 
@@ -24,8 +25,37 @@ public abstract class Personage {
 		vie=true;	
 	}
 	
-	// TODO �change
-
+	public void echange(Parcelle cible, Jeu jeu){
+		Ile ile = jeu.getIle();
+		
+		int px=p.getX();
+		int py=p.getY();
+		int cx=cible.getX();
+		int cy=cible.getY();
+		
+		if( this instanceof Explorateur){
+			if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
+				if(cible.getEstPersonage()){
+					int i=0;
+					while(cible != ile.getlistperso().get(i).getP()){
+						i++;
+					}
+					if(equipe == ile.getlistperso().get(i).getEquipe()) {
+						// afficher joption pane menu déroulant
+						// verifiant les boolean est afficher les trues
+						//cliquer sur ce qui vuet
+						// mettre les booleans à faux
+						// lui mettre sur son stuff ile.getlistperso().get(i) passe a vrai
+					}
+				}
+			
+			}
+		}else  {
+			
+		}
+	}
+	
+	
 	public int getEquipe() {
 		return equipe;
 	}
