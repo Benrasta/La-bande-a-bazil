@@ -27,7 +27,7 @@ public class Deplacement extends Action {
 		cy=cible.getY();
 
 		if( p instanceof Voleur || p instanceof Guerrier || p instanceof Piegeur){
-			//verifie si la cible est a porté du voleur
+			//verifie si la cible est a portï¿½ du voleur
 			if(!cible.getEstElement() && !cible.getEstPersonage() ){
 				if( (px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
 						|| (px-1==cx && py-1==cy) || (px+1==cx && py==cy)
@@ -65,14 +65,14 @@ public class Deplacement extends Action {
 					}	
 
 				}else{
-					System.out.println(p.toString() +" ne peux se déplacé en "+ cible.getX()+","+cible.getY() );
+					System.out.println(p.toString() +" ne peux se deplacer en "+ cible.getX()+","+cible.getY() );
 				}
 			}else{
-				System.out.println(p.toString() +" ne peux se déplacé en "+ cible.getX()+","+cible.getY() );
+				System.out.println(p.toString() +" ne peux se deplacer en "+ cible.getX()+","+cible.getY() );
 			}
 		}else {
 			if(!cible.getEstElement() &&  !cible.getEstPersonage()){
-				//verifie si la cible et a porté de l'explorateur
+				//verifie si la cible et a portï¿½ de l'explorateur
 				if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
 					p.setEnergie(p.getEnergie()-1);
 					// p prend pour parcelle la cible
@@ -102,10 +102,10 @@ public class Deplacement extends Action {
 						cible.setEstPersonage(true);
 					}
 				}else{
-					System.out.println(p.toString() +" ne peux se déplacé en "+ cible.getX()+","+cible.getY() );
+					System.out.println(p.toString() +" ne peux se deplacer en "+ cible.getX()+","+cible.getY() );
 				}
 			}else{
-				System.out.println(p.toString() +" ne peux se déplacé en "+ cible.getX()+","+cible.getY() );
+				System.out.println(p.toString() +" ne peux se deplacer en "+ cible.getX()+","+cible.getY() );
 			}
 
 		}
