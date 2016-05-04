@@ -23,21 +23,21 @@ public class Explorateur extends Personage{
 			
 				if(ile.getlistelement().get(1).getPe().equals(cible)){
 					//explorateur prend clef
-					System.out.println("Vous avez trouvez la clef");
+					System.out.println("Vous avez trouve la clef");
 					this.setaClef(true);
 					// la clef est retirer de la carte
 					ile.getlistelement().get(1).setElement(1);;
 				}else if(ile.getlistelement().get(0).getPe().equals(cible)
 						&& this.isaClef()  ){
-					//explorateur prend letrésord
-					System.out.println("Vous avez trouvez le tresor");
+					//explorateur prend letrï¿½sord
+					System.out.println("Vous avez trouve le tresor");
 					this.setaTresor(true);
 					//le coffre se vide
 					ile.getlistelement().get(0).setTresor(false);
 				}else if(ile.getlistelement().get(0).getPe().equals(cible)){
-					System.out.println("Vous avez trouvez le coffre, mais vous n'avez pas la clef");
+					System.out.println("Vous avez trouve le coffre, mais vous n'avez pas la clef");
 				}else{
-					System.out.println("Vous n'avez rien trouvez");
+					System.out.println("Vous n'avez rien trouve");
 				}
 				this.setEnergie(this.getEnergie()-5);
 				if(this.getEnergie()==0){

@@ -24,7 +24,7 @@ public abstract class Personage {
 		vie=true;	
 	}
 	
-	// TODO échange
+	// TODO ï¿½change
 
 	public int getEquipe() {
 		return equipe;
@@ -46,7 +46,7 @@ public abstract class Personage {
 			energie=0;
 		}
 		this.energie = energie;
-		System.out.println(this.getnom()+" : "+this.energie+" energie.");
+		System.out.println(this.getnom()+" : "+this.energie+" energies.");
 	}
 
 	public Parcelle getP() {

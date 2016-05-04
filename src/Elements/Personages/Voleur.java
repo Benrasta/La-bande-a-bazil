@@ -12,7 +12,7 @@ public class Voleur extends Personage{
 
 	}
 	/**
-	 * action du voleur(chance de volé un objet a  l'adersaire
+	 * action du voleur(chance de volï¿½ un objet a  l'adersaire
 	 */
 	public void Agit(Parcelle cible,Ile ile){
 		int chance = new Random().nextInt(100);
@@ -35,20 +35,20 @@ public class Voleur extends Personage{
 							ile.getlistperso().get(i).setaTresor(false);
 							this.setaClef(true);
 							this.setaTresor(true);
-							System.out.println("Vous avez voler la clef et le Tresor.");
+							System.out.println("Vous avez vole la clef et le tresor.");
 						}else if(ile.getlistperso().get(i).isaClef()){
 							ile.getlistperso().get(i).setaClef(false);
 							this.setaClef(true);
-							System.out.println("Vous avez voler la clef.");
+							System.out.println("Vous avez vole la clef.");
 						}else if(ile.getlistperso().get(i).isaTresor()){
 							ile.getlistperso().get(i).setaTresor(false);
 							this.setaTresor(true);
-							System.out.println("Vous avez voler le tresor.");
+							System.out.println("Vous avez vole le tresor.");
 						} else if(ile.getlistperso().get(i) instanceof Guerrier && ile.getlistperso().get(i).isaArme()){
 							ile.getlistperso().get(i).setaArme(false);
 							System.out.println("Vous avez voler une arme.");
 						}else{
-							System.out.println("Cette personne ne possede rien que vous ne pouvez voler");
+							System.out.println("Vous ne pouvez rien lui voler");
 						}
 						this.setEnergie(this.getEnergie()-10);
 						if(this.getEnergie()==0){

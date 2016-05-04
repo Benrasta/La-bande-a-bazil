@@ -33,7 +33,7 @@ public class Guerrier extends Personage {
 							if(ile.getlistperso().get(i).getEnergie()==0){
 								ile.getlistperso().get(i).mort(ile);
 							}
-							System.out.println("Vous avez attaquer :" + ile.getlistperso().get(i).getnom() );
+							System.out.println("Vous avez attaque :" + ile.getlistperso().get(i).getnom() );
 							this.setEnergie(this.getEnergie()-10);
 							if(this.getEnergie()==0){
 								this.mort(ile);

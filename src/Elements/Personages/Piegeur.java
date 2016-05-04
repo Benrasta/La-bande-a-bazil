@@ -26,7 +26,7 @@ public class Piegeur extends Personage {
 					ile.getlistmine().add(new Mine(cible,this.getEquipe()));
 					this.setNbMine(this.getNbMine()-1);
 					this.setEnergie(this.getEnergie()-5);
-					System.out.println("Vous avez posez une mine en "+cx+"-"+cy);
+					System.out.println("Vous avez pose une mine en "+cx+"-"+cy);
 					if(this.getEnergie()==0){
 						this.mort(ile);
 					}
