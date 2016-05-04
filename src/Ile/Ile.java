@@ -258,7 +258,7 @@ public class Ile {
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=k;
 							}else if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstElement()){
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=2;
-								if(listelement.get(0).getPe().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+								if(listelement.get(0).getPe().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])&& perso.isaTresor()){
 									jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=5;
 
 								}
