@@ -38,7 +38,7 @@ public class CreaEquipe {
 	private int nbperso;
 	private JLabel nbper;
 
-	public CreaEquipe(int equipe, Jeu j, int nbp){
+	public CreaEquipe(int equipe, Jeu j, final int nbp){
 		eq=equipe;
 		jeu=j;
 		nbperso=nbp;
@@ -59,7 +59,7 @@ public class CreaEquipe {
 				f.setVisible(false);
 				Creationequipe(eq);
 				if (eq==1){
-					new CreaEquipe(2, jeu, nbperso);
+					new CreaEquipe(2, jeu, nbp);
 				}else{
 					jeu.tour();
 				}

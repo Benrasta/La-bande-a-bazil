@@ -21,14 +21,14 @@ import Elements.Personages.Guerrier;
 import Elements.Personages.Piegeur;
 
 public class Equipe extends JPanel{
-	
+
 
 	private static final long serialVersionUID = 1L;
 	private JFrame f;
 	private int equipe;
 	private Jeu jeu;
 	private int cpt;
-	
+
 	public Equipe(int e, Jeu jeu){
 		equipe=e;
 		this.jeu=jeu;
@@ -38,13 +38,13 @@ public class Equipe extends JPanel{
 		EquipePanel();
 		f.getContentPane().add(this);
 	}
-	
+
 	public void affichage(){
 		f.pack();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 	}
-	
+
 	public void EquipePanel(){
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		ArrayList<JPanel> pan=new ArrayList <JPanel>();
@@ -57,11 +57,11 @@ public class Equipe extends JPanel{
 			if(jeu.getIle().getlistperso().get(i).getEquipe()==equipe){
 				pan.add(new JPanel());
 				pan.get(j).setLayout(new GridLayout(1, 9));
-				
-				
+
+
 				pan.get(j).add(new JLabel(jeu.getIle().getlistperso().get(i).getnom()));
 				if(jeu.getIle().getlistperso().get(i).getVie()){
-					
+
 					pan.get(j).add(new JLabel("Energie= "+jeu.getIle().getlistperso().get(i).getEnergie()));
 					pan.get(j).add(new JLabel("Inventaire: "));
 					equipement=false;
@@ -84,7 +84,7 @@ public class Equipe extends JPanel{
 					if (!equipement){
 						pan.get(j).add(new JLabel(""));
 					}
-					
+
 					dep.add(new JButton("Deplacement"));
 					ActionListenerDeplacement(dep.get(k), i);
 					pan.get(j).add(dep.get(k));
@@ -95,29 +95,25 @@ public class Equipe extends JPanel{
 				}else{
 					pan.get(j).add(new JLabel("MORT"));
 				}
-				
+
 				this.add(pan.get(j));
 				j++;
 			}
 		}
-		
+
 		JPanel pane= new JPanel();
 		pane.setLayout(new FlowLayout());
-		
+
 		JButton regle= new JButton("Regle");
-		regle.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-			public void mouseEntered(MouseEvent e) {}
-			
-			public void mouseClicked(MouseEvent e) {
+		regle.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				new Regle();
 			}
 		});
 		pane.add(regle);
-		
+
 		JButton fdt=new JButton("Fin du Tour");
 		fdt.addActionListener(new ActionListener() {
 
@@ -128,10 +124,10 @@ public class Equipe extends JPanel{
 			}
 		});
 		pane.add(fdt);
-		
+
 		JButton fdj=new JButton("Abandon");
 		fdj.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				f.setVisible(false);
@@ -139,25 +135,25 @@ public class Equipe extends JPanel{
 			}
 		});
 		pane.add(fdj);
-		
+
 		this.add(pane);
 	}
-	
+
 	public void ActionListenerAction(JButton j, int i ){
 		cpt=i;
 		j.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				jeu.Action(jeu.getIle().getlistperso().get(cpt));
 			}
 		});
 	}
-	
+
 	public void ActionListenerDeplacement(JButton j, int i){
 		cpt=i;
 		j.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				jeu.Deplacement(jeu.getIle().getlistperso().get(cpt));

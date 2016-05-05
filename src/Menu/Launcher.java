@@ -96,14 +96,10 @@ public class Launcher extends JPanel {
 		
 		JButton bu5=new JButton("Regle");
 		bu5.setPreferredSize(new Dimension(50,50));
-		bu5.addMouseListener(new MouseListener() {
+		bu5.addActionListener(new ActionListener() {
 			
-			public void mouseReleased(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-			public void mouseEntered(MouseEvent e) {}
-			
-			public void mouseClicked(MouseEvent e) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				new Regle();
 			}
 		});
@@ -164,7 +160,7 @@ public class Launcher extends JPanel {
 		
 		nbperso=new JSlider(1, 20, 4);
 		nbp=new JLabel(": "+nbperso.getValue());
-		fp.add(new JLabel("Nombre de personnage de l'IA:"));
+		fp.add(new JLabel("Nombre de personnage maximum:"));
 		nbperso.addChangeListener(new ChangeListener() {
 			
 			@Override
