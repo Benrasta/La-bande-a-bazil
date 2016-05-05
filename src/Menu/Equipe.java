@@ -1,10 +1,13 @@
 package Menu;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -19,13 +22,15 @@ import Elements.Personages.Piegeur;
 
 public class Equipe extends JPanel{
 	
+
+	private static final long serialVersionUID = 1L;
 	private JFrame f;
-	private int e;
+	private int equipe;
 	private Jeu jeu;
 	private int cpt;
 	
 	public Equipe(int e, Jeu jeu){
-		this.e=e;
+		equipe=e;
 		this.jeu=jeu;
 		f = new JFrame("Equipe "+ (e));
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -49,11 +54,14 @@ public class Equipe extends JPanel{
 		int k=0;
 		boolean equipement;
 		for (int i=0; i<(jeu.getIle().getlistperso().size()); i++){
-			if(jeu.getIle().getlistperso().get(i).getEquipe()==e){
+			if(jeu.getIle().getlistperso().get(i).getEquipe()==equipe){
 				pan.add(new JPanel());
 				pan.get(j).setLayout(new GridLayout(1, 9));
+				
+				
 				pan.get(j).add(new JLabel(jeu.getIle().getlistperso().get(i).getnom()));
 				if(jeu.getIle().getlistperso().get(i).getVie()){
+					
 					pan.get(j).add(new JLabel("Energie= "+jeu.getIle().getlistperso().get(i).getEnergie()));
 					pan.get(j).add(new JLabel("Inventaire: "));
 					equipement=false;
@@ -76,6 +84,7 @@ public class Equipe extends JPanel{
 					if (!equipement){
 						pan.get(j).add(new JLabel(""));
 					}
+					
 					dep.add(new JButton("Deplacement"));
 					ActionListenerDeplacement(dep.get(k), i);
 					pan.get(j).add(dep.get(k));
@@ -86,10 +95,29 @@ public class Equipe extends JPanel{
 				}else{
 					pan.get(j).add(new JLabel("MORT"));
 				}
+				
 				this.add(pan.get(j));
 				j++;
 			}
 		}
+		
+		JPanel pane= new JPanel();
+		pane.setLayout(new FlowLayout());
+		
+		JButton regle= new JButton("Regle");
+		regle.addMouseListener(new MouseListener() {
+			
+			public void mouseReleased(MouseEvent e) {}
+			public void mousePressed(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			
+			public void mouseClicked(MouseEvent e) {
+				new Regle();
+			}
+		});
+		pane.add(regle);
+		
 		JButton fdt=new JButton("Fin du Tour");
 		fdt.addActionListener(new ActionListener() {
 
@@ -99,7 +127,20 @@ public class Equipe extends JPanel{
 				jeu.FinDeTour();
 			}
 		});
-		this.add(fdt);
+		pane.add(fdt);
+		
+		JButton fdj=new JButton("Abandon");
+		fdj.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.setVisible(false);
+				jeu.getIle().FinDeJeu(1+(1-(equipe-1)));
+			}
+		});
+		pane.add(fdj);
+		
+		this.add(pane);
 	}
 	
 	public void ActionListenerAction(JButton j, int i ){

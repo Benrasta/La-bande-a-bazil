@@ -414,7 +414,6 @@ public class Ile {
 
 	public void FinDeJeu(int equipe){
 		p1.close();
-		JOptionPane op=new JOptionPane();
-		op.showMessageDialog(op, "Fin Du Jeu, Equipe " + equipe+ " a gagn�",null,JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(new JOptionPane(), "Fin Du Jeu, Equipe " + equipe+ " a gagne",null,JOptionPane.INFORMATION_MESSAGE);
 	}
 }

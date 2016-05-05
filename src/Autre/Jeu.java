@@ -14,10 +14,10 @@ import Menu.Equipe;
 public class Jeu {
 	private Ile ile;
 	private int equipe=0;
-	private JOptionPane op;
 	private boolean vie;
 	private ArrayList<Boolean> equi;
 	private ArrayList<IA> ia;
+	private static Scanner sc;
 
 	public Jeu (){}
 	public Jeu(Ile ile){this.ile=ile;}
@@ -27,13 +27,13 @@ public class Jeu {
 		ile.initialized(obs);			
 	}
 
-	public void LancementHVH(int dim, int obs ){
+	public void LancementHVH(int dim, int obs, int nbp ){
 		//perso de chaque equipe
 		CreaIle(dim, obs);
 		equi=new ArrayList<Boolean>();
 		equi.add(true);
 		equi.add(true);
-		new CreaEquipe(1,this);
+		new CreaEquipe(1,this, nbp);
 	}
 
 	public void LancementHVI(int dim, int obs, int nbp){
@@ -44,7 +44,7 @@ public class Jeu {
 		equi.add(false);
 		equi.add(true);
 		ia.add(new IA(1, nbp,this));
-		new CreaEquipe(2,this);
+		new CreaEquipe(2,this,nbp);
 	}
 
 	public void LancementIVI(int dim, int obs, int nbp){
@@ -69,8 +69,7 @@ public class Jeu {
 				new Deplacement(p, ile.getCarte()[x][y],this);
 			}
 		}else{
-			op=new JOptionPane();
-			op.showMessageDialog(op, "Vous ne pouvez plus agir avec ce personnage","erreur",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(new JOptionPane(), "Vous ne pouvez plus agir avec ce personnage","erreur",JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
@@ -85,17 +84,15 @@ public class Jeu {
 			}
 			ile.affichage(equipe+1, this);
 		}else{
-			op=new JOptionPane();
-			op.showMessageDialog(op, "Vous ne pouvez plus agir avec ce personnage","erreur",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(new JOptionPane(), "Vous ne pouvez plus agir avec ce personnage","erreur",JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
 	public void FinDeTour(){
 		if (equi.get(1)){
 		ile.affichagebrouillard();
+		JOptionPane.showMessageDialog(new JOptionPane(), "Au Tour du prochain joueur",null,JOptionPane.INFORMATION_MESSAGE);
 		}
-		op=new JOptionPane();
-		op.showMessageDialog(op, "Au Tour du prochain joueur",null,JOptionPane.INFORMATION_MESSAGE);
 		equipe=1-equipe;
 		tour();
 	}
@@ -149,7 +146,7 @@ public class Jeu {
 	}
 
 	public static int saisie(){
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		int i =0;
 		while (sc.hasNextInt()) {
 			i = sc.nextInt();

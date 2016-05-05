@@ -1,6 +1,5 @@
 package Actions;
 import Autre.Jeu;
-import Elements.Personages.Explorateur;
 import Elements.Personages.Guerrier;
 import Elements.Personages.Personage;
 import Elements.Personages.Piegeur;

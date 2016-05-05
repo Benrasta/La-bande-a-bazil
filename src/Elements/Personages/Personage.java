@@ -16,7 +16,6 @@ public abstract class Personage {
 	private boolean action;
 	private int tour;
 	private boolean vie;
-	private JOptionPane op;
 		
 	public Personage(int equipe,int energie,Parcelle p){
 		this.equipe=equipe;
@@ -175,8 +174,7 @@ public abstract class Personage {
 	}
 	
 	public void mort(Ile ile){
-		op=new JOptionPane();
-		op.showMessageDialog(op, getnom() +" de l'equipe" +equipe+" est mort",null,JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(new JOptionPane(), getnom() +" de l'equipe" +equipe+" est mort",null,JOptionPane.INFORMATION_MESSAGE);
 		p.setEstPersonage(false);
 		vie=false;
 	}

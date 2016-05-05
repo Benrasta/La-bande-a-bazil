@@ -1,7 +1,6 @@
 package Autre;
 import java.util.Scanner;
 
-import Actions.Action;
 import Actions.Deplacement;
 import Elements.Personages.Explorateur;
 import Elements.Personages.Guerrier;
@@ -11,8 +10,12 @@ import Ile.Ile;
 
 public class Main {
 
+	private static Scanner sc;
+
+
+
 	public static int saisie(){
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		int i =0;
 		while (sc.hasNextInt()) {
 	          i = sc.nextInt();
@@ -82,7 +85,7 @@ public class Main {
 				int y=saisie();
 				
 				if(x >=0 && y>=0 && x <laplaya.getCarte().length && y < laplaya.getCarte().length ){
-					Action tmp = new Deplacement(laplaya.getlistperso().get(choixPerso),laplaya.getCarte()[x][y],new Jeu(laplaya));
+					new Deplacement(laplaya.getlistperso().get(choixPerso),laplaya.getCarte()[x][y],new Jeu(laplaya));
 					}
 			}
 				 if(choix ==2){
