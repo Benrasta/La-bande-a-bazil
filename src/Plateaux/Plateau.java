@@ -2,6 +2,7 @@ package Plateaux;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,7 +19,6 @@ import javax.swing.JFrame;
  * @author M2103-Team
  */
 public class Plateau {
-	private static final long serialVersionUID = 1L;
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
@@ -96,7 +96,7 @@ public class Plateau {
 		window = new JFrame() ;
 		graphic = new GraphicPane(gif, taille) ;
 		console = null ;
-		window.setExtendedState(window.MAXIMIZED_BOTH);
+		window.setExtendedState(Frame.MAXIMIZED_BOTH);
 		// Caractéristiques initiales pour la fenetre.
 		window.setTitle("Plateau de jeu ("+taille+"X"+taille+")");
 		window.setLocationRelativeTo(null);

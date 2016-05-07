@@ -25,7 +25,10 @@ class GraphicPane extends JPanel {
 	private int[][] jeu;
 	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Brouillard.png","Coffre.png",
 			"BateauBleu.png","ExplorateurBleu.png","VoleurBleu.png","GuerrierBleu.png","PiegeurBleu.png","TrouBleu.png",
-			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png"};
+			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png",
+			"Mort.png","X.png","Y.png",
+			"0.png","1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png",
+			"10.png","11.png","12.png","13.png","14.png","15.png",};
 	/**
 	 * Construit un plateau de jeu vide de dimension taille x taille.
 	 * Initialement, les cellules sont vides. Le constructeur demande la fourniture

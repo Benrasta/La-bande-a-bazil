@@ -25,9 +25,12 @@ public class Ile {
 	private SuperPlateauIterable p1;
 	private int taille;
 	private int[][] jeu;
-	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Brouillard","Coffre.png",
-			"BateauBleu.png","ExplorateurBleu.png","VoleurBleu.png","GuerrierBleu.png","PiegeurBleu.png","TrouBleu.png",
-			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png"};
+	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Brouillard","Coffre.png", //1à5
+			"BateauBleu.png","ExplorateurBleu.png","VoleurBleu.png","GuerrierBleu.png","PiegeurBleu.png","TrouBleu.png", //6à11
+			"BateauRouge.png","ExplorateurRouge.png","VoleurRouge.png","GuerrierRouge.png","PiegeurRouge.png","TrouRouge.png",//12à17
+			"Mort.png","X.png","Y.png",//18à20
+			"0.png","1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png",//21 à 30
+			"10.png","11.png","12.png","13.png","14.png","15.png",};// 31 à 36
 	/**
 	 * constructeur sans paramï¿½tre qui construit une carte de 10 sur 10
 	 */
@@ -56,7 +59,7 @@ public class Ile {
 	 */
 	public void initialized(int po){
 
-		taille=carte.length+2;
+		taille=carte.length+4;
 		p1 = new SuperPlateauIterable(gifs, taille);
 		jeu=new int[taille][taille];
 
@@ -219,7 +222,9 @@ public class Ile {
 	public void affichagebrouillard(){
 		for (int i=0;i<taille;i++){
 			for (int j=0;j<taille;j++){
+				if (!(i==0 || i==jeu.length-1 || j==0 || j==jeu.length-1)){
 				jeu[i][j]=4;
+				}
 			}
 		}
 	}
@@ -228,18 +233,18 @@ public class Ile {
 		affichagebrouillard();
 		for(Personage perso: listperso){
 			if(perso.getEquipe()==equipe){
-				for(int i=-1; i<=1; i++){
-					for(int j=-1; j<=1; j++){
-						if(perso.getP().getX()+i+1>0 && perso.getP().getY()+j+1>0 && perso.getP().getX()+i+1<=carte.length && perso.getP().getY()+j+1<=carte.length){
+				for(int i=0; i<=2; i++){
+					for(int j=0; j<=2; j++){
+						if(perso.getP().getX()+i+1>1 && perso.getP().getY()+j+1>1 && perso.getP().getX()+i+1<=carte.length+1 && perso.getP().getY()+j+1<=carte.length+1){
 
-							if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstBateau() && 
-									listbateau.get(0).getP().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+							if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstBateau() && 
+									listbateau.get(0).getP().equals(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1])){
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=6;
-							}else if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstBateau()){
+							}else if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstBateau()){
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=12;
-							}else if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstPersonage()){
+							}else if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstPersonage()){
 								int l=0;
-								while (!listperso.get(l).getP().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+								while (!listperso.get(l).getP().equals(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1])){
 									l++;
 								}
 								int k=6;
@@ -256,15 +261,15 @@ public class Ile {
 									k+=4;
 								}
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=k;
-							}else if(carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstElement()){
+							}else if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstElement()){
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=2;
-								if(listelement.get(0).getPe().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])&& perso.isaTresor()){
+								if(listelement.get(0).getPe().equals(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1])&& perso.isaTresor()){
 									jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=5;
 
 								}
-							}else if (carte[perso.getP().getX()+i][perso.getP().getY()+j].getEstMine()){
+							}else if (carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstMine()){
 								int l=0;
-								while (!listmine.get(l).getPmine().equals(carte[perso.getP().getX()+i][perso.getP().getY()+j])){
+								while (!listmine.get(l).getPmine().equals(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1])){
 									l++;
 								}
 								if (listmine.get(l).getEquipe()==equipe){
@@ -276,11 +281,13 @@ public class Ile {
 								}else{
 									jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=3;
 								}
+							}else if (carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getMort()){
+								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=18;
 							}else{
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=1;
 							}
 
-						}else{
+						}else if (!(perso.getP().getX()+i+1==0 || perso.getP().getY()+j+1==0 || perso.getP().getX()+i+1==jeu.length-1 || perso.getP().getY()+j+1==jeu.length-1)){
 							jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=3;
 						}
 					}
@@ -293,16 +300,16 @@ public class Ile {
 	public void affichageIA(){
 		for(int i=0; i<jeu.length; i++){
 			for(int j=0; j<jeu.length; j++){
-				if(i>0 && j>0 && i<=carte.length && j<=carte.length){
+				if(i>1 && j>1 && i<=carte.length+1 && j<=carte.length+1){
 
-					if(carte[i-1][j-1].getEstBateau() && 
-							listbateau.get(0).getP().equals(carte[i-1][j-1])){
+					if(carte[i-2][j-2].getEstBateau() && 
+							listbateau.get(0).getP().equals(carte[i-2][j-2])){
 						jeu[i][j]=6;
-					}else if(carte[i-1][j-1].getEstBateau()){
+					}else if(carte[i-2][j-2].getEstBateau()){
 						jeu[i][j]=12;
-					}else if(carte[i-1][j-1].getEstPersonage()){
+					}else if(carte[i-2][j-2].getEstPersonage()){
 						int l=0;
-						while (!listperso.get(l).getP().equals(carte[i-1][j-1])){
+						while (!listperso.get(l).getP().equals(carte[i-2][j-2])){
 							l++;
 						}
 						int k=6;
@@ -319,15 +326,15 @@ public class Ile {
 							k+=4;
 						}
 						jeu[i][j]=k;
-					}else if(carte[i-1][j-1].getEstElement()){
+					}else if(carte[i-2][j-2].getEstElement()){
 						jeu[i][j]=2;
-						if(listelement.get(0).getPe().equals(carte[i-1][j-1])){
+						if(listelement.get(0).getPe().equals(carte[i-2][j-2])){
 							jeu[i][j]=5;
 
 						}
-					}else if (carte[i-1][j-1].getEstMine()){
+					}else if (carte[i-2][j-2].getEstMine()){
 						int l=0;
-						while (!listmine.get(l).getPmine().equals(carte[i-1][j-1])){
+						while (!listmine.get(l).getPmine().equals(carte[i-2][j-2])){
 							l++;
 						}
 						if(listmine.get(l).getEquipe()==1){
@@ -335,11 +342,13 @@ public class Ile {
 						}else{
 							jeu[i][j]=17;
 						}
+					}else if(carte[i-2][j-2].getMort()){
+						jeu[i][j]=18;
 					}else{
 						jeu[i][j]=1;
 					}
 
-				}else{
+				}else if(!(i==0 || i==jeu.length-1 || j==0 || j==jeu.length-1)){
 					jeu[i][j]=3;
 				}
 			}
@@ -348,6 +357,26 @@ public class Ile {
 
 	public void affichage(int equipe, Jeu j){
 		//affectation de la carte dans un tableau d'entiers
+		int k=19;
+		for(int i=0; i<jeu.length; i++){
+			for(int l=0; l<jeu.length; l++){
+				if((i==0 && l==0)||(i==0 && l==jeu.length-1) || (l==0 && i==jeu.length-1)||(i==jeu.length-1 && l==jeu.length-1)){
+					jeu[i][l]=5;
+				}else if(i==0 || i==jeu.length-1 ){
+					if(l==1 || l==jeu.length-2 ){
+						jeu[i][l]=19;
+					}else{
+						jeu[i][l]=k+l;
+					}
+				}else if(l==0 || l==jeu.length-1){
+					if(l==1|| i==jeu.length-2){
+						jeu[i][l]=20;
+					}else{
+						jeu[i][l]=k+i;
+					}
+				}
+			}
+		}
 		if(j.getHumain()){
 			affichagehumain(equipe);
 		}else{
@@ -406,10 +435,6 @@ public class Ile {
 
 	public void setlistmine (ArrayList<Mine> list){
 		listmine=list;
-	}
-
-	public SuperPlateauIterable getPlateau(){
-		return p1;
 	}
 
 	public void FinDeJeu(int equipe){

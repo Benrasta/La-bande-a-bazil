@@ -1,5 +1,7 @@
 package Ile;
 
+import Elements.Personages.Personage;
+
 /**
  * classe parcelle
  * @author doudou
@@ -12,6 +14,11 @@ public class Parcelle {
 	private boolean estelement =false;
 	private boolean estCoffre = false;
 	private boolean estMine= false;
+	private boolean mort;
+	private boolean aArme;
+	private boolean aClef;
+	private boolean aTresor;
+	private int nbMine;
 
 	
 
@@ -130,11 +137,39 @@ public class Parcelle {
 		return res;
 	}
 	
-
-	
-
-	
+	public void setMort(boolean Arme, boolean Clef, boolean Tresor, int Mine){
+		mort=true;
+		aArme=Arme;
+		aClef=Clef;
+		aTresor=Tresor;
+		nbMine=Mine;
 	}
+	
+	public boolean getMort(){
+		return mort;
+	}
+	
+	public void setInventaire(Personage p){
+		if (!p.isaArme()){
+			p.setaArme(aArme);
+		}
+		if(!p.isaClef()){
+			p.setaClef(aClef);
+		}
+		if(!p.isaTresor()){
+			p.setaTresor(aTresor);
+		}
+		p.setNbMine(p.getNbMine()+nbMine);
+		aArme=false;
+		aClef=false;
+		aTresor=false;
+		nbMine=0;
+		mort=false;
+		System.out.println("Vous recuperez l'inventaire de la personne qui est morte ici.");
+	}
+		
+	
+}
 	
 	
 	

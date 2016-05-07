@@ -66,7 +66,7 @@ public class Jeu {
 			System.out.println("y:");
 			int y=saisie();
 			if(x >=0 && y>=0 && x <ile.getCarte().length && y < ile.getCarte().length ){
-				new Deplacement(p, ile.getCarte()[x][y],this);
+				new Deplacement(p,ile.getCarte()[x][y],this);
 			}
 		}else{
 			JOptionPane.showMessageDialog(new JOptionPane(), "Vous ne pouvez plus agir avec ce personnage","erreur",JOptionPane.WARNING_MESSAGE);
@@ -90,8 +90,13 @@ public class Jeu {
 
 	public void FinDeTour(){
 		if (equi.get(1)){
-		ile.affichagebrouillard();
-		JOptionPane.showMessageDialog(new JOptionPane(), "Au Tour du prochain joueur",null,JOptionPane.INFORMATION_MESSAGE);
+			ile.affichagebrouillard();
+		}
+			JOptionPane.showMessageDialog(new JOptionPane(), "Au Tour du prochain joueur",null,JOptionPane.INFORMATION_MESSAGE);
+		for (int i=0; i<ile.getlistperso().size(); i++){
+			if(!ile.getlistperso().get(i).getVie()){
+				ile.getlistperso().remove(i);
+			}
 		}
 		equipe=1-equipe;
 		tour();
@@ -132,13 +137,6 @@ public class Jeu {
 				new Equipe(equipe+1, this).affichage();
 			}
 		}
-		if (equipe==1){
-			for (int i=0; i<ile.getlistperso().size(); i++){
-				if(!ile.getlistperso().get(i).getVie()){
-					ile.getlistperso().remove(i);
-				}
-			}
-		}
 	}
 
 	public Ile getIle(){
@@ -154,11 +152,10 @@ public class Jeu {
 		}
 		return  i;
 	}
-	
+
 	public boolean getHumain(){
 		return equi.get(1);
 	}
-	
-	// TODO clique de souris ou clavier
+
 }
 

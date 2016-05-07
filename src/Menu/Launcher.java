@@ -131,7 +131,7 @@ public class Launcher extends JPanel {
 		
 		
 		fp.add(new JLabel("Taille du plateau:"));
-		dimension= new JSlider(7, 20, 10);
+		dimension= new JSlider(7, 16, 10);
 		dim=new JLabel(": "+dimension.getValue());
 		dimension.addChangeListener(new ChangeListener() {
 			

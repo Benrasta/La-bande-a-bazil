@@ -32,6 +32,7 @@ public class Explorateur extends Personage{
 					//explorateur prend letr�sord
 					System.out.println("Vous avez trouve le tresor");
 					this.setaTresor(true);
+					this.setaClef(false);
 					//le coffre se vide
 					ile.getlistelement().get(0).setTresor(false);
 				}else if(ile.getlistelement().get(0).getPe().equals(cible)){

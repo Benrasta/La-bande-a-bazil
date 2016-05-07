@@ -7,12 +7,12 @@ import Ile.Parcelle;
 
 public abstract class Personage {
 	private boolean aArme;
-	private int equipe;
-	private int energie;
-	private Parcelle p;
 	private boolean aClef;
 	private boolean aTresor;
 	private int nbMine;
+	private int equipe;
+	private int energie;
+	private Parcelle p;
 	private boolean action;
 	private int tour;
 	private boolean vie;
@@ -177,6 +177,7 @@ public abstract class Personage {
 		JOptionPane.showMessageDialog(new JOptionPane(), getnom() +" de l'equipe" +equipe+" est mort",null,JOptionPane.INFORMATION_MESSAGE);
 		p.setEstPersonage(false);
 		vie=false;
+		p.setMort(aArme, aClef, aTresor, nbMine);
 	}
 	
 	public boolean getVie(){

@@ -1,5 +1,6 @@
 package Plateaux;
 
+import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.util.Iterator;
 /**
@@ -56,6 +57,5 @@ public class SuperPlateauIterable implements Iterable<Integer> {
 	public void close() {
 		plateau.close() ;
 	}
-
 }
 
