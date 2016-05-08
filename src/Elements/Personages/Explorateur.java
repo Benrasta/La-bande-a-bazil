@@ -30,22 +30,23 @@ public class Explorateur extends Personnage{
 				
 				setaction(false);
 			
-				if(ile.getlistelement().get(1).getPe().equals(cible)){
+				if(cible.getEstClef()){
 					//explorateur prend clef
 					System.out.println("Vous avez trouve la clef");
 					this.setaClef(true);
 					// la clef est retirer de la carte
-					ile.getlistelement().get(1).setElement(1);;
-				}else if(ile.getlistelement().get(0).getPe().equals(cible)
-						&& this.isaClef()  ){
+					ile.getlistelement().get(1).setElement(1);
+					cible.setEstClef(false);
+				}else if(cible.getEstCoffre()&& this.isaClef()  ){
 					//explorateur prend letr�sord
 					System.out.println("Vous avez trouve le tresor");
 					this.setaTresor(true);
 					this.setaClef(false);
 					//le coffre se vide
 					ile.getlistelement().get(0).setTresor(false);
-				}else if(ile.getlistelement().get(0).getPe().equals(cible)){
+				}else if(cible.getEstCoffre()){
 					System.out.println("Vous avez trouve le coffre, mais vous n'avez pas la clef");
+					ile.setCoffre(getEquipe());
 				}else{
 					System.out.println("Vous n'avez rien trouve");
 				}
@@ -53,6 +54,8 @@ public class Explorateur extends Personnage{
 				if(this.getEnergie()==0){
 					this.mort(ile);
 				}
+			}else if(cible.getEstPersonnage()){
+				this.echange(cible, ile);
 			}else{
 				System.out.println("Vous ne pouvez pas agir en "+cx+"-"+cy);
 			}

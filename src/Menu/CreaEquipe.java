@@ -123,7 +123,7 @@ public class CreaEquipe {
 		lvol.setPreferredSize(new Dimension (200,20));
 		pp.add(lvol);
 		
-		vol = new JSpinner(new SpinnerNumberModel(1, 0, 20, 1));
+		vol = new JSpinner(new SpinnerNumberModel(0, 0, 20, 1));
 		valvol=(int) vol.getValue();
 		nbperso-=valvol;
 		vol.setPreferredSize(new Dimension (150,45));
@@ -146,7 +146,7 @@ public class CreaEquipe {
 		lgue.setPreferredSize(new Dimension (200,20));
 		pp.add(lgue);
 		
-		gue = new JSpinner(new SpinnerNumberModel(1, 0, 20, 1));
+		gue = new JSpinner(new SpinnerNumberModel(0, 0, 20, 1));
 		valgue=(int) gue.getValue();
 		nbperso-=valgue;
 		gue.setPreferredSize(new Dimension (150,45));
@@ -169,7 +169,7 @@ public class CreaEquipe {
 		lpie.setPreferredSize(new Dimension (200,20));
 		pp.add(lpie);
 		
-		pie = new JSpinner(new SpinnerNumberModel(1, 0, 20, 1));
+		pie = new JSpinner(new SpinnerNumberModel(0, 0, 20, 1));
 		valpie=(int) pie.getValue();
 		nbperso-=valpie;
 		pie.setPreferredSize(new Dimension (150,45));

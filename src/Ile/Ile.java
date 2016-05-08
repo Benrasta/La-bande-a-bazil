@@ -23,6 +23,7 @@ public class Ile {
 	private ArrayList<Bateau> listbateau;
 	private ArrayList<Mine> listmine;
 	private SuperPlateauIterable p1;
+	private int coffre;
 	private int taille;
 	private int[][] jeu;
 	private String[] gifs={"Chemin.png","Rocher.png","Eau.png","Brouillard","Coffre.png", //1à5
@@ -140,8 +141,9 @@ public class Ile {
 		}
 
 		//generation de la clef et du coffre a coter du chemin
+
 		int id =3;
-		while(id>0){
+		while(id>1){
 			int i= new Random().nextInt(this.getCarte().length);
 			int j= new Random().nextInt(this.getCarte().length);
 			if( i!=0 && j!=0 && i!=this.getCarte().length-1 && j!=this.getCarte().length-1 && tmmp[i][j]!=true){
@@ -150,11 +152,16 @@ public class Ile {
 					id--;
 					tmmp[i][j]=true;
 					carte[i][j].setEstElement(true);
-					//System.out.println(i +" " + j);
+					if (id==2){
+						System.out.println(this.listelement.get(0).getPe().getX()+" / "+this.listelement.get(0).getPe().getY());
+						carte[i][j].setEstCoffre(true);
+					}else{
+						System.out.println(this.listelement.get(1).getPe().getX()+" + "+this.listelement.get(1).getPe().getY());
+						carte[i][j].setEstClef(true);
+					}
 				}
 			}
 		}
-		//System.out.println(this.listelement.get(0).getPe().getX()+" "+this.listelement.get(0).getPe().getY());
 		//genere les Rochers ï¿½latoirement 
 		while(nbob >0){
 			int l = new Random().nextInt(this.getCarte().length);
@@ -218,7 +225,7 @@ public class Ile {
 		}
 		return res;
 	}
-	
+
 	/**
 	 * remplit le tableau de jeu avec l'image du brouillard
 	 */
@@ -226,7 +233,7 @@ public class Ile {
 		for (int i=0;i<taille;i++){
 			for (int j=0;j<taille;j++){
 				if (!(i==0 || i==jeu.length-1 || j==0 || j==jeu.length-1)){
-				jeu[i][j]=4;
+					jeu[i][j]=4;
 				}
 			}
 		}
@@ -271,7 +278,7 @@ public class Ile {
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=k;
 							}else if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstElement()){
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=2;
-								if(listelement.get(0).getPe().equals(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1])&& perso.isaTresor()){
+								if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstCoffre() && (coffre==3|| coffre==perso.getEquipe())){
 									jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=5;
 
 								}
@@ -382,13 +389,13 @@ public class Ile {
 					jeu[i][l]=5;
 				}else if(i==0 || i==jeu.length-1 ){
 					if(l==1 || l==jeu.length-2 ){
-						jeu[i][l]=19;
+						jeu[i][l]=20;
 					}else{
 						jeu[i][l]=k+l;
 					}
 				}else if(l==0 || l==jeu.length-1){
-					if(l==1|| i==jeu.length-2){
-						jeu[i][l]=20;
+					if(i==1|| i==jeu.length-2){
+						jeu[i][l]=19;
 					}else{
 						jeu[i][l]=k+i;
 					}
@@ -431,7 +438,7 @@ public class Ile {
 	public ArrayList<Personnage> getlistperso(){
 		return listperso;
 	}
-	
+
 	/**
 	 * revoie la liste des element
 	 * 
@@ -458,7 +465,7 @@ public class Ile {
 	public ArrayList<Mine> getlistmine(){
 		return listmine;
 	}
-	
+
 	/**
 	 * quitte le jeu et affiche qui a gagné
 	 * 
@@ -468,4 +475,14 @@ public class Ile {
 		p1.close();
 		JOptionPane.showMessageDialog(new JOptionPane(), "Fin Du Jeu, Equipe " + equipe+ " a gagne",null,JOptionPane.INFORMATION_MESSAGE);
 	}
+
+	/**
+	 * prend le numéro de l'equipe qui a trouver le coffre
+	 * 
+	 * @param equipe
+	 */
+	public void setCoffre(int equipe) {
+		coffre+=equipe;
+	}
+	
 }

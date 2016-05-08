@@ -49,6 +49,7 @@ public class Deplacement extends Action {
 						ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonnage(false);
 						ile.getlistbateau().get(p.getEquipe()-1).lp.add(p);
 						if(p.isaTresor()){
+							System.out.println("TRESOR");
 							ile.getlistbateau().get(p.getEquipe()-1).setTresor(true);
 							ile.FinDeJeu(p.getEquipe());
 						}

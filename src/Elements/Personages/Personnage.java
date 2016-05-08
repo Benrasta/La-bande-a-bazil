@@ -1,7 +1,6 @@
 package Elements.Personages;
 import javax.swing.JOptionPane;
 
-import Autre.Jeu;
 import Ile.Ile;
 import Ile.Parcelle;
 
@@ -37,35 +36,55 @@ public abstract class Personnage {
 	 * @param cible
 	 * @param jeu
 	 */
-	public void echange(Parcelle cible, Jeu jeu){
-		Ile ile = jeu.getIle();
-
-		int px=p.getX();
-		int py=p.getY();
-		int cx=cible.getX();
-		int cy=cible.getY();
-
-		if( this instanceof Explorateur){
-			if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
-				if(cible.getEstPersonnage()){
-					int i=0;
-					while(cible != ile.getlistperso().get(i).getP()){
-						i++;
-					}
-					if(equipe == ile.getlistperso().get(i).getEquipe()) {
-						// afficher joption pane menu déroulant
-						// verifiant les boolean est afficher les trues
-						//cliquer sur ce qui vuet
-						// mettre les booleans à faux
-						// lui mettre sur son stuff ile.getlistperso().get(i) passe a vrai
-					}
-				}
-
+	public void echange(Parcelle cible, Ile ile){
+		int i=0;
+		while(cible != ile.getlistperso().get(i).getP()){
+			i++;
+		}
+		if(equipe == ile.getlistperso().get(i).getEquipe()) {
+			String[] stuff= new String [4];
+			int cpt=0;
+			if(aArme){
+				stuff[cpt]="Arme";
+				cpt++;
 			}
-		}else  {
-
+			if(aClef){
+				stuff[cpt]="Clef";
+				cpt++;
+			}
+			if(aTresor){
+				stuff[cpt]="Tresor";
+				cpt++;
+			}
+			if(nbMine>0){
+				stuff[cpt]="Mines";
+				cpt++;
+			}
+			if (cpt>0){ 
+				String reponse =(String)JOptionPane.showInputDialog(new JOptionPane(),"Que voulez nous echanger","Echange",JOptionPane.INFORMATION_MESSAGE,null,stuff,stuff[0]);
+				setaction(false);
+				if(reponse.equals("Mines")){
+					int rep= Integer.parseInt((String)JOptionPane.showInputDialog(new JOptionPane(),"Combien de Mine voulez vous donner?\n"+"Vous en avez "+ nbMine, JOptionPane.INFORMATION_MESSAGE));
+					nbMine-=rep;
+					ile.getlistperso().get(i).setNbMine(ile.getlistperso().get(i).getNbMine()+rep);
+				}else if(reponse.equals("Tresor")){
+					aTresor=false;
+					ile.getlistperso().get(i).setaTresor(true);
+				}else if(reponse.equals("Clef")){
+					aClef=false;
+					ile.getlistperso().get(i).setaClef(true);
+				}else if(reponse.equals("Arme")){
+					aArme=false;
+					ile.getlistperso().get(i).setaArme(true);
+				}
+			}else{
+				JOptionPane.showMessageDialog(new JOptionPane(),"Vous n'avez aucun objet sur vous",null,JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
+
+
+
 
 	/**
 	 * @return l'equipe

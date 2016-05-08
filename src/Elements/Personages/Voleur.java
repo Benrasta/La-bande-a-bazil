@@ -33,7 +33,7 @@ public class Voleur extends Personnage{
 				|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy) ){
 			if(cible.getEstPersonnage()){
 				for(int i =0 ; i <ile.getlistperso().size();i++){
-					if(this.getP().equals(ile.getlistperso().get(i).getP()) 
+					if(cible.equals(ile.getlistperso().get(i).getP()) 
 							&& this.getEquipe()!= ile.getlistperso().get(i).getEquipe()){
 						setaction(false);
 						if (chance <50){
@@ -62,6 +62,8 @@ public class Voleur extends Personnage{
 						if(this.getEnergie()==0){
 							this.mort(ile);
 						}
+					}else if (cible.equals(ile.getlistperso().get(i).getP())){
+						this.echange(cible, ile);
 					}
 				}
 			}else{

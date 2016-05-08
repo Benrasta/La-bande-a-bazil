@@ -32,18 +32,21 @@ public class Guerrier extends Personnage {
 				if(cible.getEstPersonnage()){
 					setaction(false);
 					for(int i =0 ; i <ile.getlistperso().size();i++){
-						if(this.getP().equals(ile.getlistperso().get(i).getP()) 
+						if(cible.equals(ile.getlistperso().get(i).getP()) 
 								&& this.getEquipe()!= ile.getlistperso().get(i).getEquipe()){
 							ile.getlistperso().get(i).setEnergie(ile.getlistperso().get(i).getEnergie()-15);
 							if(ile.getlistperso().get(i).getEnergie()==0){
 								ile.getlistperso().get(i).mort(ile);
 							}
+							setaction(false);
 							System.out.println("Vous avez attaque :" + ile.getlistperso().get(i).getnom() );
 							this.setEnergie(this.getEnergie()-10);
 							if(this.getEnergie()==0){
 								this.mort(ile);
 							}
 							break;
+						}else if(cible.equals(ile.getlistperso().get(i).getP())){
+							this.echange(cible, ile);
 						}
 					}
 				}else{

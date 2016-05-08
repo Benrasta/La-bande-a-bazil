@@ -41,6 +41,8 @@ public class Piegeur extends Personnage {
 					}
 					cible.setEstMine(true);
 					
+				}else if (cible.getEstPersonnage()){
+					this.echange(cible, ile);
 				}else{
 					System.out.println("Vous ne pouvez pas agir en "+cx+"-"+cy);
 				}

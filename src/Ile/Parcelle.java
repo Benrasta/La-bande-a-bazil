@@ -13,6 +13,7 @@ public class Parcelle {
 	private boolean estperso = false;
 	private boolean estelement =false;
 	private boolean estCoffre = false;
+	private boolean estClef = false;
 	private boolean estMine= false;
 	private boolean mort;
 	private boolean aArme;
@@ -103,7 +104,21 @@ public class Parcelle {
 	public void setEstCoffre(boolean b){
 		estCoffre=b;
 	} 
+	/**
+	 * @return si il y a une clef sur la parcelle
+	 */
+	public boolean getEstClef(){
+		return this.estClef;
+	}
 	
+	/**
+	 * Cree ou enleve une clef sur la parcelle
+	 * 
+	 * @param b
+	 */
+	public void setEstClef(boolean b){
+		estClef=b;
+	} 
 	/**
 	 * méthode qui permet de savoir si l'élément est un element
 	 * @return
