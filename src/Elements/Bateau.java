@@ -1,13 +1,13 @@
 package Elements;
 import java.util.ArrayList;
 
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 import Ile.Parcelle;
 
 public class Bateau {
 	private int equipe;
 	private Parcelle p;
-	public ArrayList<Personage> lp;
+	public ArrayList<Personnage> lp;
 	private boolean tresor;
 	
 	/**
@@ -19,7 +19,7 @@ public class Bateau {
 		this.setTresor(false);
 		this.p=p;
 		this.equipe=equipe;
-		this.lp= new ArrayList<Personage>();
+		this.lp= new ArrayList<Personnage>();
 	}
 	/**
 	 * revoie la parcelle courante 

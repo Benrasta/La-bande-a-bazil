@@ -1,16 +1,22 @@
 package Autre;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
 import Actions.Deplacement;
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 import Ile.Ile;
 import Menu.CreaEquipe;
 import Menu.Equipe;
 
+/**
+ * classe permettant la jonction entre les autres
+ * @author Gaby
+ *
+ */
 public class Jeu {
 	private Ile ile;
 	private int equipe=0;
@@ -19,14 +25,37 @@ public class Jeu {
 	private ArrayList<IA> ia;
 	private static Scanner sc;
 
+	/**
+	 * Constructeur vide
+	 */
 	public Jeu (){}
+	
+	/**
+	 * Constructeur avec une ile
+	 * 
+	 * @param ile
+	 */
 	public Jeu(Ile ile){this.ile=ile;}
+	
+	/**
+	 * Lance l'initialisation de l'ile, e taille dim et avec obs% d'obstacles
+	 * 
+	 * @param dim
+	 * @param obs
+	 */
 	public void CreaIle(int dim, int obs){
-		//initialisation de la laplaya	
+		//initialisation de la l'ile
 		ile= new Ile(dim,dim);
 		ile.initialized(obs);			
 	}
 
+	/**
+	 * Lance le jeu avec deux equipe humaine avec un plateau de taille dim et de obs% d'obstacle et une equipe de nbp personnages
+	 * 
+	 * @param dim
+	 * @param obs
+	 * @param nbp
+	 */
 	public void LancementHVH(int dim, int obs, int nbp ){
 		//perso de chaque equipe
 		CreaIle(dim, obs);
@@ -36,6 +65,13 @@ public class Jeu {
 		new CreaEquipe(1,this, nbp);
 	}
 
+	/**
+	 * Lance le jeu avec une equipe humaine et une IA avec un plateau de taille dim et de obs% d'obstacle et une equipe de nbp personnages
+	 * 
+	 * @param dim
+	 * @param obs
+	 * @param nbp
+	 */
 	public void LancementHVI(int dim, int obs, int nbp){
 		//perso de chaque equipe
 		CreaIle(dim, obs);
@@ -47,6 +83,13 @@ public class Jeu {
 		new CreaEquipe(2,this,nbp);
 	}
 
+	/**
+	 * Lance le jeu avec deux IA avec un plateau de taille dim et de obs% d'obstacle et une equipe de nbp personnages
+	 * 
+	 * @param dim
+	 * @param obs
+	 * @param nbp
+	 */
 	public void LancementIVI(int dim, int obs, int nbp){
 		//perso de chaque equipe
 		CreaIle(dim, obs);
@@ -59,7 +102,12 @@ public class Jeu {
 		tour();
 	}
 
-	public void Deplacement(Personage p){
+	/**
+	 * Permet de choisir ou on veut se deplacer
+	 * 
+	 * @param p
+	 */
+	public void Deplacement(Personnage p){
 		if (p.getaction()){
 			System.out.println("x:");
 			int x=saisie();
@@ -73,7 +121,12 @@ public class Jeu {
 		}
 	}
 
-	public void Action(Personage p){
+	/**
+	 * Permet de choisir ou on veut agir
+	 * 
+	 * @param p
+	 */
+	public void Action(Personnage p){
 		if (p.getaction()){
 			System.out.println("x:");
 			int x=saisie();
@@ -88,6 +141,9 @@ public class Jeu {
 		}
 	}
 
+	/**
+	 * Termine le tour et lance un nouveau
+	 */
 	public void FinDeTour(){
 		if (equi.get(1)){
 			ile.affichagebrouillard();
@@ -102,6 +158,9 @@ public class Jeu {
 		tour();
 	}
 
+	/**
+	 * joue un nouveau tour
+	 */
 	public void tour(){
 		vie=false;
 		for (int i=0; i<ile.getlistperso().size(); i++){
@@ -139,11 +198,17 @@ public class Jeu {
 		}
 	}
 
+	/**
+	 * @return l'ile
+	 */
 	public Ile getIle(){
 		return ile;
 	}
 
-	public static int saisie(){
+	/**
+	 * @return la saisie
+	 */
+	private static int saisie(){
 		sc = new Scanner(System.in);
 		int i =0;
 		while (sc.hasNextInt()) {
@@ -153,6 +218,9 @@ public class Jeu {
 		return  i;
 	}
 
+	/**
+	 * @return l'etat de la deuxieme equipe (humain=true, ia=false)
+	 */
 	public boolean getHumain(){
 		return equi.get(1);
 	}

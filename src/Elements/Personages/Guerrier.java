@@ -2,9 +2,14 @@ package Elements.Personages;
 import Ile.Ile;
 import Ile.Parcelle;
 
-public class Guerrier extends Personage {
+public class Guerrier extends Personnage {
 	
-	
+	/**
+	 * fait apelle au Constructeur de Personnage
+	 * @param equipe
+	 * @param energie
+	 * @param p
+	 */
 	public Guerrier(int equipe, int energie, Parcelle p) {
 		super(equipe, energie, p);
 		this.setaArme(true);
@@ -13,7 +18,7 @@ public class Guerrier extends Personage {
 
 	/**
 	 * attaque du gerrier
-	 * @see Personage#Agit(Parcelle, Ile)
+	 * @see Personnage#Agit(Parcelle, Ile)
 	 */
 	public void Agit(Parcelle cible, Ile ile) {
 		if(this.isaArme()){
@@ -24,7 +29,7 @@ public class Guerrier extends Personage {
 			if((px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
 					|| (px-1==cx && py-1==cy) || (px+1==cx && py==cy)
 					|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy) ){
-				if(cible.getEstPersonage()){
+				if(cible.getEstPersonnage()){
 					setaction(false);
 					for(int i =0 ; i <ile.getlistperso().size();i++){
 						if(this.getP().equals(ile.getlistperso().get(i).getP()) 
@@ -55,6 +60,9 @@ public class Guerrier extends Personage {
 	}
 
 
+	/**
+	 * @return Guerrier
+	 */	
 	public String getnom(){
 		return "Guerrier";
 	}

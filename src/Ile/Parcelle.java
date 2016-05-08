@@ -1,6 +1,6 @@
 package Ile;
 
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 
 /**
  * classe parcelle
@@ -24,16 +24,34 @@ public class Parcelle {
 
 	private int x, y;  // coordonnées de la parcelle; 
 	
-	
+	/**
+	 * @return la coordonnee X de la parcelle
+	 */
 	public int getX() {
 		return x;
 	}
+	
+	/**
+	 * change la coordonnee X de la parcelle
+	 * 
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
+	
+	/**
+	 * @return la coordonnee Y de la parcelle
+	 */
 	public int getY() {
 		return y;
 	}
+	
+	/**
+	 * change la coordonnee Y de la parcelle
+	 * 
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
@@ -61,14 +79,27 @@ public class Parcelle {
 		
 	}
 	
+	/**
+	 * Cree ou enleve un bateau sur la parcelle
+	 * 
+	 * @param b
+	 */
 	public void setEstBateau(boolean b){
 		estbateau=b;
 	}
 	
+	/**
+	 * @return si il y a un coffre sur la parcelle
+	 */
 	public boolean getEstCoffre(){
 		return this.estCoffre;
 	}
 	
+	/**
+	 * Cree ou enleve un coffre sur la parcelle
+	 * 
+	 * @param b
+	 */
 	public void setEstCoffre(boolean b){
 		estCoffre=b;
 	} 
@@ -81,26 +112,44 @@ public class Parcelle {
 		return this.estelement;
 	}
 	
+	/**
+	 * Cree ou enleve un element sur la parcelle
+	 * 
+	 * @param b
+	 */
 	public void setEstElement(boolean b){
 		estelement=b;
 	}
 	
 	/**
-	 * méthode qui permet de savoir si l'élément est un personage
+	 * méthode qui permet de savoir si l'élément est un personnage
 	 * @return
 	 */
-	public boolean getEstPersonage(){
+	public boolean getEstPersonnage(){
 		return this.estperso;
 	}
 	
-	public void setEstPersonage(boolean b){
+	/**
+	 * Met ou enleve un personnage sur la parcelle
+	 * 
+	 * @param b
+	 */
+	public void setEstPersonnage(boolean b){
 		estperso=b;
 	}
 	
+	/**
+	 * @return si il y a une mine sur la parcelle
+	 */
 	public boolean getEstMine(){
 		return this.estMine;
 	}
 	
+	/**
+	 * Cree ou enleve une mine sur la parcelle
+	 * 
+	 * @param b
+	 */
 	public void setEstMine(boolean b){
 		estMine=b;
 	}
@@ -137,6 +186,14 @@ public class Parcelle {
 		return res;
 	}
 	
+	/**
+	 * Depose de l'quipement sur la parcelle et y cree un mort
+	 * 
+	 * @param Arme
+	 * @param Clef
+	 * @param Tresor
+	 * @param Mine
+	 */
 	public void setMort(boolean Arme, boolean Clef, boolean Tresor, int Mine){
 		mort=true;
 		aArme=Arme;
@@ -145,11 +202,19 @@ public class Parcelle {
 		nbMine=Mine;
 	}
 	
+	/**
+	 * @return si il y a un mort sur la parcelle
+	 */
 	public boolean getMort(){
 		return mort;
 	}
 	
-	public void setInventaire(Personage p){
+	/**
+	 * Transefere l'quipement qui est sur la parcelle, dans l'quipement du personnage p
+	 * 
+	 * @param p
+	 */
+	public void setInventaire(Personnage p){
 		if (!p.isaArme()){
 			p.setaArme(aArme);
 		}

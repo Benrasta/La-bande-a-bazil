@@ -10,14 +10,14 @@ import Elements.Bateau;
 import Elements.Element;
 import Elements.Personages.Explorateur;
 import Elements.Personages.Guerrier;
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 import Elements.Personages.Voleur;
 import Plateaux.SuperPlateauIterable;
 
 public class Ile {
 
 
-	private ArrayList<Personage> listperso;
+	private ArrayList<Personnage> listperso;
 	private ArrayList<Element> listelement;
 	private Parcelle [][] carte;
 	private ArrayList<Bateau> listbateau;
@@ -32,7 +32,7 @@ public class Ile {
 			"0.png","1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png",//21 à 30
 			"10.png","11.png","12.png","13.png","14.png","15.png",};// 31 à 36
 	/**
-	 * constructeur sans paramï¿½tre qui construit une carte de 10 sur 10
+	 * constructeur sans parametre qui construit une carte de 10 sur 10
 	 */
 	public Ile(){
 		this.setCarte(new Parcelle[10][10]);
@@ -55,7 +55,7 @@ public class Ile {
 	}
 
 	/**
-	 * initialisation de l'Ile avec placement des elï¿½ments et des bateaux
+	 * initialisation de l'Ile avec placement des elements et des bateaux
 	 */
 	public void initialized(int po){
 
@@ -71,7 +71,7 @@ public class Ile {
 		}
 
 
-		// fait un tableau de boolean de la mï¿½me taille que l'ile 
+		// fait un tableau de boolean de la meme taille que l'ile 
 
 		boolean [][] tmmp = new boolean[this.getCarte().length][this.getCarte()[1].length];
 
@@ -191,7 +191,7 @@ public class Ile {
 						}
 					}
 				}else{
-					if(carte[i][j].getEstPersonage()){
+					if(carte[i][j].getEstPersonnage()){
 						for(int x =0;  x < this.listperso.size(); x++){
 							if(carte[i][j].equals(this.listperso.get(x).getP())){
 								res= res + this.listperso.get(x).toString();
@@ -218,7 +218,10 @@ public class Ile {
 		}
 		return res;
 	}
-
+	
+	/**
+	 * remplit le tableau de jeu avec l'image du brouillard
+	 */
 	public void affichagebrouillard(){
 		for (int i=0;i<taille;i++){
 			for (int j=0;j<taille;j++){
@@ -229,9 +232,14 @@ public class Ile {
 		}
 	}
 
+	/**
+	 * affiche le plateau avec le brouillard de guerre
+	 * 
+	 * @param equipe
+	 */
 	public void affichagehumain(int equipe){
 		affichagebrouillard();
-		for(Personage perso: listperso){
+		for(Personnage perso: listperso){
 			if(perso.getEquipe()==equipe){
 				for(int i=0; i<=2; i++){
 					for(int j=0; j<=2; j++){
@@ -242,7 +250,7 @@ public class Ile {
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=6;
 							}else if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstBateau()){
 								jeu[perso.getP().getX()+i+1][perso.getP().getY()+j+1]=12;
-							}else if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstPersonage()){
+							}else if(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1].getEstPersonnage()){
 								int l=0;
 								while (!listperso.get(l).getP().equals(carte[perso.getP().getX()+i-1][perso.getP().getY()+j-1])){
 									l++;
@@ -297,6 +305,9 @@ public class Ile {
 
 	}
 
+	/**
+	 * affiche le plateau de jeu sans brouillard
+	 */
 	public void affichageIA(){
 		for(int i=0; i<jeu.length; i++){
 			for(int j=0; j<jeu.length; j++){
@@ -307,7 +318,7 @@ public class Ile {
 						jeu[i][j]=6;
 					}else if(carte[i-2][j-2].getEstBateau()){
 						jeu[i][j]=12;
-					}else if(carte[i-2][j-2].getEstPersonage()){
+					}else if(carte[i-2][j-2].getEstPersonnage()){
 						int l=0;
 						while (!listperso.get(l).getP().equals(carte[i-2][j-2])){
 							l++;
@@ -355,6 +366,13 @@ public class Ile {
 		}
 	}
 
+	/**
+	 * remplit les bords du plateau avec les chiffre
+	 * permet de lancer l'affichage correct (IA ou Humain)
+	 * 
+	 * @param equipe
+	 * @param j
+	 */
 	public void affichage(int equipe, Jeu j){
 		//affectation de la carte dans un tableau d'entiers
 		int k=19;
@@ -405,38 +423,47 @@ public class Ile {
 		this.carte = carte;
 	}
 
-	public ArrayList<Personage> getlistperso(){
+	/**
+	 * revoie la liste des personnages
+	 * 
+	 * @return
+	 */
+	public ArrayList<Personnage> getlistperso(){
 		return listperso;
 	}
-
-	public void setlistperso (ArrayList<Personage> list){
-		listperso=list;
-	}
-
+	
+	/**
+	 * revoie la liste des element
+	 * 
+	 * @return
+	 */
 	public ArrayList<Element> getlistelement(){
 		return listelement;
 	}
 
-	public void setlistelement (ArrayList<Element> list){
-		listelement=list;
-	}
-
+	/**
+	 * revoie la liste des bateaux
+	 * 
+	 * @return
+	 */
 	public ArrayList<Bateau> getlistbateau(){
 		return listbateau;
 	}
 
-	public void setlistbateau (ArrayList<Bateau> list){
-		listbateau=list;
-	}
-
+	/**
+	 * revoie la liste des mines
+	 * 
+	 * @return
+	 */
 	public ArrayList<Mine> getlistmine(){
 		return listmine;
 	}
-
-	public void setlistmine (ArrayList<Mine> list){
-		listmine=list;
-	}
-
+	
+	/**
+	 * quitte le jeu et affiche qui a gagné
+	 * 
+	 * @param equipe
+	 */
 	public void FinDeJeu(int equipe){
 		p1.close();
 		JOptionPane.showMessageDialog(new JOptionPane(), "Fin Du Jeu, Equipe " + equipe+ " a gagne",null,JOptionPane.INFORMATION_MESSAGE);

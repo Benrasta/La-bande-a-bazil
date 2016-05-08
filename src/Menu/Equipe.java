@@ -15,8 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Autre.Jeu;
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 
+/**
+ * classe affichant le panneau d'equipe sur le coter
+ * @author Gaby
+ *
+ */
 public class Equipe extends JPanel{
 
 
@@ -25,22 +30,36 @@ public class Equipe extends JPanel{
 	private int equipe;
 	private Jeu jeu;
 
+	/**
+	 * Constructeur qui ajouter un EquipePanel
+	 * 
+	 * @param e
+	 * @param jeu
+	 */
 	public Equipe(int e, Jeu jeu){
 		equipe=e;
 		this.jeu=jeu;
 		f = new JFrame("Equipe "+ (e));
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		f.setLocation((int)((dim.width-f.getSize().width)/2), (dim.height-(dim.height+f.getSize().height)));
+		f.setLocation((int)((dim.width-f.getSize().width)/2.5), (dim.height-(dim.height+f.getSize().height)));
 		EquipePanel();
 		f.getContentPane().add(this);
 	}
 
+	/**
+	 * affiche le panneau
+	 */
 	public void affichage(){
 		f.pack();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 	}
 
+	/**
+	 * rempli le panneau avec tout les information necessaire
+	 * nom du personnage, position, energie, inventaire 
+	 * et un bouton pour ce deplacer ainsi que un pour agir
+	 */
 	public void EquipePanel(){
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		ArrayList<JPanel> pan=new ArrayList <JPanel>();
@@ -49,7 +68,7 @@ public class Equipe extends JPanel{
 		int j=0;
 		int k=0;
 		int cpt=0;
-		for (Personage i: jeu.getIle().getlistperso()){
+		for (Personnage i: jeu.getIle().getlistperso()){
 			if(i.getEquipe()==equipe){
 				pan.add(new JPanel());
 				pan.get(j).setLayout(new GridLayout(1, 12));

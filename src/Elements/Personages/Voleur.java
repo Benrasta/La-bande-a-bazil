@@ -4,15 +4,23 @@ import java.util.Random;
 import Ile.Ile;
 import Ile.Parcelle;
 
-public class Voleur extends Personage{
+public class Voleur extends Personnage{
 
 
+	/**
+	 * fait apelle au Constructeur de Personnage
+	 * @param equipe
+	 * @param energie
+	 * @param p
+	 */
 	public Voleur(int equipe, int energie, Parcelle p) {
 		super(equipe, energie, p);
 
 	}
 	/**
-	 * action du voleur(chance de vol� un objet a  l'adersaire
+	 * action du voleur(chance de voler un objet a  l'adersaire)
+	 * 
+	 * @see Personnage#Agit(Parcelle, Ile)
 	 */
 	public void Agit(Parcelle cible,Ile ile){
 		int chance = new Random().nextInt(100);
@@ -23,7 +31,7 @@ public class Voleur extends Personage{
 		if((px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
 				|| (px-1==cx && py-1==cy) || (px+1==cx && py==cy)
 				|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy) ){
-			if(cible.getEstPersonage()){
+			if(cible.getEstPersonnage()){
 				for(int i =0 ; i <ile.getlistperso().size();i++){
 					if(this.getP().equals(ile.getlistperso().get(i).getP()) 
 							&& this.getEquipe()!= ile.getlistperso().get(i).getEquipe()){
@@ -64,6 +72,9 @@ public class Voleur extends Personage{
 		}
 	}
 
+	/**
+	 * @return Voleur
+	 */	
 	public String getnom(){
 		return "Voleur";
 	}

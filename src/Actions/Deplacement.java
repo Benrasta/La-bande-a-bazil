@@ -1,7 +1,7 @@
 package Actions;
 import Autre.Jeu;
 import Elements.Personages.Guerrier;
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 import Elements.Personages.Piegeur;
 import Elements.Personages.Voleur;
 import Ile.Ile;
@@ -14,8 +14,16 @@ public class Deplacement extends Action {
 	private int py;
 	private int cx;
 	private int cy;
+	
+	/**
+	 * effectue le deplacement d'un personnage p sur une parcelle cible si cella est possible
+	 * 
+	 * @param p 
+	 * @param cible
+	 * @param jeu
+	 */
 
-	public Deplacement(Personage p, Parcelle cible,Jeu jeu){
+	public Deplacement(Personnage p, Parcelle cible,Jeu jeu){
 		super(p,cible);
 		ile=jeu.getIle();
 
@@ -27,18 +35,18 @@ public class Deplacement extends Action {
 
 		if( p instanceof Voleur || p instanceof Guerrier || p instanceof Piegeur){
 			//verifie si la cible est a port� du voleur
-			if(!cible.getEstElement() && !cible.getEstPersonage() ){
+			if(!cible.getEstElement() && !cible.getEstPersonnage() ){
 				if( (px-1 ==cx && py==cy) || (py-1==cy && px==cx) || (px+1==cx && py-1==cy)
 						|| (px-1==cx && py-1==cy) || (px+1==cx && py==cy)
 						|| (px-1==cx && py+1==cy) || (py+1==cy && px==cx) || (px+1==cx && py+1==cy)){
 					p.setEnergie(p.getEnergie()-1);
 					// p prend pour parcelle la cible
-					ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
+					ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonnage(false);
 					p.setP(cible);
 					p.setaction(false);
 
 					if(cible.equals(ile.getlistbateau().get(p.getEquipe()-1))){
-						ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
+						ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonnage(false);
 						ile.getlistbateau().get(p.getEquipe()-1).lp.add(p);
 						if(p.isaTresor()){
 							ile.getlistbateau().get(p.getEquipe()-1).setTresor(true);
@@ -50,7 +58,7 @@ public class Deplacement extends Action {
 					}else if(p.getP().equals(ile.getlistbateau().get(p.getEquipe()-1))){
 						ile.getlistbateau().get(p.getEquipe()-1).lp.remove(p);
 					}else{
-						cible.setEstPersonage(true);
+						cible.setEstPersonnage(true);
 						if (cible.getMort()){
 							cible.setInventaire(p);
 						}
@@ -67,16 +75,16 @@ public class Deplacement extends Action {
 				System.out.println(p.toString() +" ne peux se deplacer en "+ cible.getX()+","+cible.getY() );
 			}
 		}else {
-			if(!cible.getEstElement() &&  !cible.getEstPersonage()){
+			if(!cible.getEstElement() &&  !cible.getEstPersonnage()){
 				//verifie si la cible et a port� de l'explorateur
 				if((py-1==cy && px==cx)|| (px-1==cx && py==cy) || (px+1==cx&&py==cy) || (py+1==cy && px==cx) ){
 					p.setEnergie(p.getEnergie()-1);
 					// p prend pour parcelle la cible
-					ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
+					ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonnage(false);
 					p.setP(cible);
 					p.setaction(false);
 					if(cible.equals(ile.getlistbateau().get(p.getEquipe()-1))){
-						//ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonage(false);
+						//ile.getCarte()[p.getP().getX()][p.getP().getY()].setEstPersonnage(false);
 						ile.getlistbateau().get(p.getEquipe()-1).lp.add(p);
 						if(p.isaTresor()){
 							ile.getlistbateau().get(p.getEquipe()-1).setTresor(true);
@@ -86,7 +94,7 @@ public class Deplacement extends Action {
 						ile.getlistbateau().get(p.getEquipe()-1).lp.remove(p);
 
 					}else{
-						cible.setEstPersonage(true);
+						cible.setEstPersonnage(true);
 						if (cible.getMort()){
 							cible.setInventaire(p);
 						}

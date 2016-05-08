@@ -5,7 +5,7 @@ import java.util.Random;
 import Actions.Deplacement;
 import Elements.Personages.Explorateur;
 import Elements.Personages.Guerrier;
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 import Elements.Personages.Voleur;
 import Ile.Parcelle;
 
@@ -50,7 +50,7 @@ public class IA {
 	}
 
 	public void tour(){
-		for (Personage p:jeu.getIle().getlistperso()){
+		for (Personnage p:jeu.getIle().getlistperso()){
 			if (p.getEquipe()==e){
 				if (!estBateau.equals(p.getP()) || p.getEnergie()==100){
 					if (((estBateau.getX()-p.getP().getX())+(estBateau.getY()-p.getP().getY())+jeu.getIle().getCarte().length+5>=p.getEnergie())|| aTresor){
@@ -69,7 +69,7 @@ public class IA {
 
 
 
-	private void retour (Personage p, Parcelle destination){
+	private void retour (Personnage p, Parcelle destination){
 		int X=p.getP().getX();
 		int Y=p.getP().getY();
 		int x=destination.getX()-X;
@@ -82,7 +82,7 @@ public class IA {
 	}
 
 
-	private void tourExplorateur(Personage p){
+	private void tourExplorateur(Personnage p){
 		int X=p.getP().getX();
 		int Y=p.getP().getY();
 		if (p.isaClef() && !estCoffre.equals(estBateau)){retour(p,estCoffre);}
@@ -90,7 +90,7 @@ public class IA {
 			for(int x=-1; x<=1; x++){
 				for(int y=-1; y<=1; y++){
 					if(X+x>0 && Y+y>0 && X+x<jeu.getIle().getCarte().length && Y+y<jeu.getIle().getCarte().length){
-						if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
+						if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonnage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
 							new Deplacement(p,jeu.getIle().getCarte() [X+x] [Y+y], jeu);
 						}
 					}
@@ -117,7 +117,7 @@ public class IA {
 				for(int x=-1; x<=1; x++){
 					for(int y=-1; y<=1; y++){
 						if(X+x>0 && Y+y>0 && X+x<jeu.getIle().getCarte().length && Y+y<jeu.getIle().getCarte().length){
-							if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
+							if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonnage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
 								new Deplacement(p,jeu.getIle().getCarte() [X+x] [Y+y], jeu);
 							}
 						}
@@ -127,7 +127,7 @@ public class IA {
 		}				
 	}
 
-	private void tourGuerrier (Personage p){
+	private void tourGuerrier (Personnage p){
 		int X=p.getP().getX();
 		int Y=p.getP().getY();
 		int k;
@@ -142,7 +142,7 @@ public class IA {
 			for(int x=-1; x<=1; x++){
 				for(int y=-1; y<=1; y++){
 					if(X+x>0 && Y+y>0 && X+x<jeu.getIle().getCarte().length && Y+y<jeu.getIle().getCarte().length){
-						if(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() || jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonage()|| jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() || jeu.getIle().getCarte() [X+x] [Y+y].getEstMine()){
+						if(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() || jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonnage()|| jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() || jeu.getIle().getCarte() [X+x] [Y+y].getEstMine()){
 							new Deplacement(p,jeu.getIle().getCarte() [X+x] [Y+y], jeu);
 						}
 					}
@@ -151,7 +151,7 @@ public class IA {
 		}else{
 			for(int i=-1; i<=1 ; i++){
 				for(int j=-1; j<=1 ; j++){
-					if(!aAgit && (X+i>=0 && Y+j>=0 && X+i<jeu.getIle().getCarte().length && Y+j<jeu.getIle().getCarte().length) &&(i!=0 || j!=0 ) && ( jeu.getIle().getCarte() [X+i] [Y+j].getEstPersonage())){
+					if(!aAgit && (X+i>=0 && Y+j>=0 && X+i<jeu.getIle().getCarte().length && Y+j<jeu.getIle().getCarte().length) &&(i!=0 || j!=0 ) && ( jeu.getIle().getCarte() [X+i] [Y+j].getEstPersonnage())){
 						k=0;
 						while(!(jeu.getIle().getCarte() [X+i] [Y+j].equals(jeu.getIle().getlistperso().get(k).getP()))){k++;}
 						if(jeu.getIle().getlistperso().get(k).getEnergie()!=p.getEnergie()){
@@ -165,7 +165,7 @@ public class IA {
 				for(int x=-1; x<=1; x++){
 					for(int y=-1; y<=1; y++){
 						if(X+x>0 && Y+y>0 && X+x<jeu.getIle().getCarte().length && Y+y<jeu.getIle().getCarte().length){
-							if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
+							if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonnage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
 								new Deplacement(p,jeu.getIle().getCarte() [X+x] [Y+y], jeu);
 							}
 						}
@@ -175,7 +175,7 @@ public class IA {
 		}
 	}
 
-	private void tourVoleur (Personage p){
+	private void tourVoleur (Personnage p){
 		int X=p.getP().getX();
 		int Y=p.getP().getY();
 		int k;
@@ -188,7 +188,7 @@ public class IA {
 			for(int x=-1; x<=1; x++){
 				for(int y=-1; y<=1; y++){
 					if(X+x>0 && Y+y>0 && X+x<jeu.getIle().getCarte().length && Y+y<jeu.getIle().getCarte().length){
-						if(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() || jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonage()|| jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() || jeu.getIle().getCarte() [X+x] [Y+y].getEstMine()){
+						if(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() || jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonnage()|| jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() || jeu.getIle().getCarte() [X+x] [Y+y].getEstMine()){
 							new Deplacement(p,jeu.getIle().getCarte() [X+x] [Y+y], jeu);
 						}
 					}
@@ -197,7 +197,7 @@ public class IA {
 		}else{
 			for(int i=-1; i<=1 ; i++){
 				for(int j=-1; j<=1 ; j++){
-					if((X+i>=0 && Y+j>=0 && X+i<jeu.getIle().getCarte().length && Y+j<jeu.getIle().getCarte().length) &&(i!=0 || j!=0 ) && ( jeu.getIle().getCarte() [X+i] [Y+j].getEstPersonage())){
+					if((X+i>=0 && Y+j>=0 && X+i<jeu.getIle().getCarte().length && Y+j<jeu.getIle().getCarte().length) &&(i!=0 || j!=0 ) && ( jeu.getIle().getCarte() [X+i] [Y+j].getEstPersonnage())){
 						k=0;
 						while(!(jeu.getIle().getCarte() [X+i] [Y+j].equals(jeu.getIle().getlistperso().get(k).getP()))){k++;}
 						if(jeu.getIle().getlistperso().get(k).getEquipe()!=p.getEquipe()){
@@ -210,7 +210,7 @@ public class IA {
 				for(int x=-1; x<=1; x++){
 					for(int y=-1; y<=1; y++){
 						if(X+x>0 && Y+y>0 && X+x<jeu.getIle().getCarte().length && Y+y<jeu.getIle().getCarte().length){
-							if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
+							if(!(jeu.getIle().getCarte() [X+x] [Y+y].getEstBateau() && jeu.getIle().getCarte() [X+x] [Y+y].getEstPersonnage() && jeu.getIle().getCarte() [X+x] [Y+y].getEstElement() && jeu.getIle().getCarte() [X+x] [Y+y].getEstMine())){
 								new Deplacement(p,jeu.getIle().getCarte() [X+x] [Y+y], jeu);
 							}
 						}

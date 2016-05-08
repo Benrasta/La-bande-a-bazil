@@ -1,6 +1,4 @@
 package Plateaux;
-import java.util.Random;
-
 import Ile.Ile;
 public class SuperPlateau {
 	private Plateau p1;
@@ -43,8 +41,7 @@ public class SuperPlateau {
 	
 	
 	public static void main(String[] args){
-		
-		Random r=new Random();
+	
 		String[] gifs={"images/arbre.png","images/rocher.png","images/1.navire.png",
 				"images/2.navire.png","images/mer.png","images/coffre.png"};
 		Ile carte= new Ile();

@@ -2,15 +2,24 @@ package Elements.Personages;
 import Ile.Ile;
 import Ile.Parcelle;
 
-public class Explorateur extends Personage{
+public class Explorateur extends Personnage{
 	
-	
+	/**
+	 * fait apelle au Constructeur de Personnage
+	 * @param equipe
+	 * @param energie
+	 * @param p
+	 */
 	public Explorateur(int equipe, int energie, Parcelle p) {
 		super(equipe, energie, p);
 		
 	}
 
-	//action de l'explorateur sur un element
+	/**
+	 * Action de l'explorateur sur un element
+	 * 
+	 * @see Personnage#Agit(Parcelle, Ile)
+	 */
 	public void Agit(Parcelle cible,Ile ile){
 		int px=this.getP().getX();
 		int py=this.getP().getY();
@@ -53,7 +62,9 @@ public class Explorateur extends Personage{
 		}
 	}
 			
-		
+	/**
+	 * @return Explorateur
+	 */	
 	public String getnom(){
 		return "Explorateur";
 	}

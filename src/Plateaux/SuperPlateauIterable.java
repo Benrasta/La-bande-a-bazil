@@ -1,6 +1,5 @@
 package Plateaux;
 
-import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.util.Iterator;
 /**

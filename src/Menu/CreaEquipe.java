@@ -22,6 +22,11 @@ import Elements.Personages.Guerrier;
 import Elements.Personages.Piegeur;
 import Elements.Personages.Voleur;
 
+/**
+ * classe affichant le menu de creation d'equipe et les cree
+ * @author Gaby
+ *
+ */
 public class CreaEquipe {
 
 	private JFrame f;
@@ -37,7 +42,15 @@ public class CreaEquipe {
 	private JSpinner pie;
 	private int nbperso;
 	private JLabel nbper;
+	
 
+	/**
+	 * Constructeur initialisant un PersoPanel et un boutton de validation
+	 * 
+	 * @param equipe
+	 * @param j
+	 * @param nbp
+	 */
 	public CreaEquipe(int equipe, Jeu j, final int nbp){
 		eq=equipe;
 		jeu=j;
@@ -73,6 +86,11 @@ public class CreaEquipe {
 		f.setVisible(true);
 	}
 
+	/**
+	 * Ajoute les different spinner
+	 * 
+	 * @param p
+	 */
 	public void PersoPanel(JPanel p) {
 		JPanel pp=new JPanel();
 		pp.setLayout(new GridLayout(5,2));
@@ -178,6 +196,11 @@ public class CreaEquipe {
 		p.add(pp);		
 	}
 
+	/**
+	 * Cree une Equipe
+	 * 
+	 * @param eq
+	 */
 	public Equipe Creationequipe(int eq){
 		for(int i=0; i<(int) exp.getValue();i++){
 			jeu.getIle().getlistperso().add(new Explorateur(eq, 100, jeu.getIle().getlistbateau().get(eq-1).getP()));

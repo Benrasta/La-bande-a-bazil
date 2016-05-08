@@ -4,8 +4,6 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,6 +18,11 @@ import javax.swing.event.ChangeListener;
 import Autre.Jeu;
 import Autre.Test;
 
+/**
+ * classe lancant le Launcher
+ * @author Gaby
+ *
+ */
 public class Launcher extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -31,6 +34,9 @@ public class Launcher extends JPanel {
 	private JLabel obs;
 	private JLabel nbp;
 
+	/**
+	 * Constructeur qui crée un containerz
+	 */
 	public Launcher(){	
 		f = new JFrame("Launcher");
 		Containerz();
@@ -43,6 +49,11 @@ public class Launcher extends JPanel {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 	}
+	
+	/**
+	 * Ajoute un First panel ainsi que les bouttons:
+	 * Humain VS Humain, Humain VS IA, IA VS IA, Regle, Test
+	 */
 
 	public void Containerz (){
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -125,6 +136,9 @@ public class Launcher extends JPanel {
 		
 	}
 
+	/**
+	 * ajoute des slide pour la dimension le nombre d'obstacle et le nombre de personnage
+	 */
 	public void FirstPanel(){
 		JPanel fp=new JPanel();
 		fp.setLayout(new GridLayout(3,3));
@@ -172,5 +186,19 @@ public class Launcher extends JPanel {
 		fp.add(nbp);
 
 		this.add(fp);
+	}
+	
+	/**
+	 * main lançant l'intégralité du jeu
+	 * 
+	 * @param args
+	 */
+	public static void main(String args[]){
+
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	        public void run() {
+	          new Launcher();
+	        }
+	    });
 	}
 }

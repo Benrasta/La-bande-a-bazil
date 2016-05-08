@@ -1,14 +1,14 @@
 package Actions;
-import Elements.Personages.Personage;
+import Elements.Personages.Personnage;
 import Ile.Parcelle;
 
 public abstract class Action {
 
-	private Personage p;
+	private Personnage p;
 	private Parcelle cible;
 	
 	
-	public Action(Personage p,Parcelle cible){
+	public Action(Personnage p,Parcelle cible){
 		this.p=p;
 		this.cible=cible;
 	}
@@ -20,10 +20,10 @@ public abstract class Action {
 	public void setCible(Parcelle cible) {
 		this.cible = cible;
 	}
-	public Personage getP() {
+	public Personnage getP() {
 		return p;
 	}
-	public void setP(Personage p) {
+	public void setP(Personnage p) {
 		this.p = p;
 	}
 

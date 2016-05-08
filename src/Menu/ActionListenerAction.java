@@ -7,10 +7,22 @@ import javax.swing.JButton;
 
 import Autre.Jeu;
 
-public class ActionListenerAction {
+/**
+ * Classe permmetant de cree des bouttons indépendant
+ * @author Gaby
+ *
+ */
+public class ActionListenerAction{
 
 	private int cpt;
 	
+	/**
+	 * Permmet de cree des bouttons indépendant
+	 * 
+	 * @param j
+	 * @param i
+	 * @param jeu
+	 */
 	public ActionListenerAction(JButton j, int i, final Jeu jeu ){
 		cpt=i;
 		j.addActionListener(new ActionListener() {

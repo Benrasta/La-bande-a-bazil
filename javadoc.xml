@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="javadoc">
     <target name="javadoc">
-        <javadoc access="public" author="true" classpath="lib" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.8" sourcefiles="src/SuperPlateau.java,src/Main.java,src/Element.java,src/mainIHM.java,src/Personage.java,src/Ile.java,src/Explorateur.java,src/Voleur.java,src/Bateau.java,src/Parcelle.java" sourcepath="src" splitindex="true" use="true" version="true"/>
+        <javadoc access="private" author="true" classpath="." destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.7" sourcefiles="src/Elements/Personages/Explorateur.java" sourcepath="src" splitindex="true" use="true" version="true"/>
     </target>
 </project>
