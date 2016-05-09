@@ -153,10 +153,8 @@ public class Ile {
 					tmmp[i][j]=true;
 					carte[i][j].setEstElement(true);
 					if (id==2){
-						System.out.println(this.listelement.get(0).getPe().getX()+" / "+this.listelement.get(0).getPe().getY());
 						carte[i][j].setEstCoffre(true);
 					}else{
-						System.out.println(this.listelement.get(1).getPe().getX()+" + "+this.listelement.get(1).getPe().getY());
 						carte[i][j].setEstClef(true);
 					}
 				}

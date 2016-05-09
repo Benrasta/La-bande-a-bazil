@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Autre.Jeu;
+import Autre.Test;
 import Elements.Personages.Personnage;
 
 /**
@@ -29,6 +30,7 @@ public class Equipe extends JPanel{
 	private JFrame f;
 	private int equipe;
 	private Jeu jeu;
+	private Test t;
 
 	/**
 	 * Constructeur qui ajouter un EquipePanel
@@ -39,6 +41,24 @@ public class Equipe extends JPanel{
 	public Equipe(int e, Jeu jeu){
 		equipe=e;
 		this.jeu=jeu;
+		f = new JFrame("Equipe "+ (e));
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		f.setLocation((int)((dim.width-f.getSize().width)/2.5), (dim.height-(dim.height+f.getSize().height)));
+		EquipePanel();
+		f.getContentPane().add(this);
+	}
+
+
+	/**
+	 * Constructeur qui ajouter un EquipePanel pour les tests
+	 * 
+	 * @param e
+	 * @param jeu
+	 */
+	public Equipe(int e, Jeu jeu, Test t){
+		equipe=e;
+		this.jeu=jeu;
+		this.t=t;
 		f = new JFrame("Equipe "+ (e));
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		f.setLocation((int)((dim.width-f.getSize().width)/2.5), (dim.height-(dim.height+f.getSize().height)));
@@ -68,6 +88,7 @@ public class Equipe extends JPanel{
 		int j=0;
 		int k=0;
 		int cpt=0;
+		System.out.println(jeu.getIle().getlistperso().size());
 		for (Personnage i: jeu.getIle().getlistperso()){
 			if(i.getEquipe()==equipe){
 				pan.add(new JPanel());
@@ -133,7 +154,11 @@ public class Equipe extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				f.setVisible(false);
-				jeu.FinDeTour();
+				if (jeu.getTest()){
+					jeu.FinDeTour();
+				}else{
+					t.tour();
+				}
 			}
 		});
 		pane.add(fdt);

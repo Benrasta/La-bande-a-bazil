@@ -24,6 +24,7 @@ public class Jeu {
 	private ArrayList<Boolean> equi;
 	private ArrayList<IA> ia;
 	private static Scanner sc;
+	private boolean test=false;
 
 	/**
 	 * Constructeur vide
@@ -35,7 +36,11 @@ public class Jeu {
 	 * 
 	 * @param ile
 	 */
-	public Jeu(Ile ile){this.ile=ile;}
+	public Jeu(Ile ile){this.ile=ile;test=true;}
+	
+	public boolean getTest(){
+		return test;
+	}
 	
 	/**
 	 * Lance l'initialisation de l'ile, e taille dim et avec obs% d'obstacles
@@ -216,6 +221,17 @@ public class Jeu {
 			return i;
 		}
 		return  i;
+	}
+	
+	/**
+	 * permet de creer une petie que d'humain ou que d'ia (humain=true, ia=false)
+	 * 
+	 * @param b
+	 */
+	public void setHumain(boolean b){
+		equi=new ArrayList<Boolean>();
+		equi.add(b);
+		equi.add(b);
 	}
 
 	/**

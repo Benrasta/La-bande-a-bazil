@@ -126,7 +126,7 @@ public class Launcher extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				f.setVisible(false);
-				new Test();
+				new Test(dimension.getValue(), obstacles.getValue());
 			}
 		});
 		Box bx4=Box.createHorizontalBox();
